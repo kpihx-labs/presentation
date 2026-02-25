@@ -24,7 +24,11 @@ KpihX Labs is the transition from the **"Island of Local"** to the **"Peninsula 
 ### 3. Industrialization (DevOps)
 Development follows a strict **PC ➔ GitLab ➔ Homelab** workflow:
 - **GitLab CI/CD:** Local Runner on Docker-Host executes deployments.
-- **GitHub Mirroring:** Every private GitLab project is automatically synced to the [KpihX-Lab GitHub Org](https://github.com/KpihX-Lab).
+- **GitHub Mirroring:** Every private GitLab project is automatically synced to the [kpihx-labs GitHub Org](https://github.com/kpihx-labs).
+
+## 🌐 Live Showcase
+The documentation is dynamically served via **Docsify** at:
+👉 **[https://kpihx-labs.github.io/presentation](https://kpihx-labs.github.io/presentation)**
 
 ## 🔐 CI/CD Secret Variables
 To function, the GitLab pipelines require the following variables defined in the Group/Project settings:
