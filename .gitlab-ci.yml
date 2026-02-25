@@ -10,8 +10,10 @@ stages:
 
 github_pages:
   stage: deploy_pages
-  # We use a lightweight Git image because we don't need Docker here
-  image: alpine/git:latest
+  # On force l'entrypoint vide pour pouvoir exécuter des commandes shell
+  image: 
+    name: alpine/git:latest
+    entrypoint: [""]
   variables:
     GITHUB_ORG: "KpihX-Lab"
     REPO_NAME: "presentation"
