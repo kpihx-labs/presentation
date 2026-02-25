@@ -1,63 +1,50 @@
 # KpihX Labs - Presentation Documentation CI/CD
 # File: .gitlab-ci.yml
-# Goal: 
-# 1. Fetch live scripts from the 'scripts' repository.
-# 2. Package everything into a 'gh-pages' branch.
-# 3. Mirror the documentation and the website to GitHub.
 
 stages:
   - deploy_pages
 
 github_pages:
   stage: deploy_pages
-  # On force l'entrypoint vide pour pouvoir exécuter des commandes shell
   image: 
     name: alpine/git:latest
     entrypoint: [""]
   variables:
     GITHUB_ORG: "KpihX-Lab"
     REPO_NAME: "presentation"
-    # Target the public mirror of your scripts repo
-    SCRIPTS_REPO_URL: "https://github.com/KpihX-Lab/scripts.git"
   only:
     - main
   script:
     - echo "🚀 Preparing GitHub Pages deployment..."
     
-    # Configure local Git for commits
+    # Configure local Git
     - git config --global user.email "ci@kpihx-labs.com"
     - git config --global user.name "GitLab CI"
     
-    # 1. Create a specific branch for the final website
+    # 1. Create gh-pages branch
     - git checkout -b gh-pages
     
-    # 2. Fetch the live scripts from the mirror repo
-    - echo "📥 Fetching live scripts from ${SCRIPTS_REPO_URL}..."
-    - git clone ${SCRIPTS_REPO_URL} temp_scripts || true
+    # 2. Fetch live scripts (using GITHUB_TOKEN for auth)
+    - echo "📥 Fetching live scripts from GitHub..."
+    - git clone https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_ORG}/scripts.git temp_scripts || echo "⚠️ Failed to clone scripts repo."
     - mkdir -p live_scripts
-    # Move all .sh scripts to the live_scripts directory
-    - cp temp_scripts/*.sh live_scripts/ 2>/dev/null || true
+    - cp temp_scripts/*.sh live_scripts/ 2>/dev/null || echo "ℹ️ No .sh files found to import."
     - rm -rf temp_scripts
     
-    # 3. Add to git and commit (this commit will only exist on gh-pages, keeping main clean)
+    # 3. Commit changes to gh-pages
     - git add live_scripts/
     - git commit -m "Auto-import live scripts [skip ci]" || echo "No scripts to update."
     
-    # 4. Initialize GitHub repo via API (if it doesn't exist)
+    # 4. Ensure GitHub repo exists and push
     - echo "🔄 Syncing to GitHub..."
-    - |
-      apk add --no-cache curl
-      curl -s -H "Authorization: token ${GITHUB_TOKEN}" 
-           -X POST -d "{"name":"${REPO_NAME}", "private":false}" 
-           https://api.github.com/orgs/${GITHUB_ORG}/repos || true
+    - apk add --no-cache curl
+    - curl -s -H "Authorization: token ${GITHUB_TOKEN}" -X POST -d "{\"name\":\"${REPO_NAME}\", \"private\":false}" https://api.github.com/orgs/${GITHUB_ORG}/repos || echo "ℹ️ Repo might already exist."
     
-    # Set remote
+    # Set remote and push both branches
     - git remote add github https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_ORG}/${REPO_NAME}.git || git remote set-url github https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_ORG}/${REPO_NAME}.git
     
-    # 5. Push both branches to GitHub
-    # Push the clean main branch (Source code)
+    - echo "📤 Pushing to GitHub..."
     - git push github main:main --force
-    # Push the built website branch (Docsify + Scripts)
     - git push github gh-pages:gh-pages --force
     
-    - echo "✅ Sync complete. On GitHub, go to Settings > Pages and select 'gh-pages' branch."
+    - echo "✅ Sync complete."
