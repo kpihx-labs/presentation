@@ -2,9 +2,9 @@
 
 ## [Février 2026] : L'Ère de l'Auto-Validation et de l'Expérience Web
 - **Unification de la Navigation :** Transition critique vers des **URLs web absolues** sur l'ensemble du dépôt. Résolution définitive des erreurs 404.
-- **Usine de Validation :** Mise en place de scripts de tests full-verbose (`check_links.sh`, `check_templates.sh`, `check_tutos.sh`) pour garantir l'intégrité du maillage technique.
+- **Usine de Validation :** Mise en place de scripts de tests full-verbose ([check_links.sh](https://github.com/kpihx-labs/presentation/blob/main/scripts/check_links.sh), [check_templates.sh](https://github.com/kpihx-labs/presentation/blob/main/scripts/check_templates.sh), [check_tutos.sh](https://github.com/kpihx-labs/presentation/blob/main/scripts/check_tutos.sh)) pour garantir l'intégrité du maillage technique.
 - **Intelligence Documentaire :** Intégration d'un moteur de recherche full-text et d'un thème sombre dynamique.
-- **Consolidation du Mandat Agent :** Inscription de la philosophie de reproductibilité par scripts et de proactivité dans `AGENT.md`.
+- **Consolidation du Mandat Agent :** Inscription de la philosophie de reproductibilité par scripts et de proactivité dans [AGENT.md](https://kpihx-labs.github.io/presentation/#/AGENT.md).
 
 ## [Décembre 2025] : Transparence et Accès Public
 - Achat du domaine `kpihx-labs.com`.
@@ -13,7 +13,8 @@
 - Déploiement de **PolyTask Pro** (Voir [Template PolyTask](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/polytask.yaml)) et **WA-Bot** (Voir [Template WA-Bot](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/wa_bot.yaml)).
 - Initialisation de **Vaultwarden** pour la souveraineté des secrets. (Voir [Template Vaultwarden](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/vaultwarden.yaml))
 - Structuration de la "Boîte Noire" documentaire dans `presentation/` avec un mandat strict de **100% transparence et exhaustivité**.
-- Rédaction de tutoriels "Live" axés "Problème ➔ Solution" dans le sous-dossier `tutos_live/`.
+- Mise sur pied du conteneur "Usine" (**Docker-Host**) et déploiement de **Traefik**. (Voir [Tuto 2 : Mise sur pied du Docker-Host et Routage Intelligent](https://kpihx-labs.github.io/presentation/#/tutos_live/2-mise-en-place-docker-host.md))
+- Rédaction de tutoriels "Live" axés "Problème ➔ Solution" dans le sous-dossier [tutos_live/](https://kpihx-labs.github.io/presentation/#/tutos_live/README.md).
 - Externalisation et standardisation de toutes les configurations (Docker Compose, Scripts, SSH) dans `tutos_live/templates/` avec documentation approfondie en anglais.
 
 ## [Décembre 2025] : L'Usine Logicielle
@@ -31,12 +32,13 @@
 - Développement du **Network Watchdog V3**. (Voir [Annexe 1 : Network Watchdog (Auto-Réparation & Monitoring)](https://kpihx-labs.github.io/presentation/#/tutos_live/annexes/1-network-watchdog-v3.md))
 - Configuration du Masquerading (NAT) sur `vmbr1` for l'isolation des LXC. (Voir [Tuto 1 : Déploiement Proxmox sur Réseau Sécurisé (802.1X Filaire)](https://kpihx-labs.github.io/presentation/#/tutos_live/1-deploiement-proxmox-8021x.md))
 - Mise en place de la règle de sauvegarde 3-2-1 (Local, SSD, Cloud). (Voir [Sécurité 1 : Stratégie de Sauvegarde et Maintenance (3-2-1)](https://kpihx-labs.github.io/presentation/#/tutos_live/security/1-sauvegarde-maintenance-321.md))
+- Automatisation des mises à jour applicatives via Watchtower. (Voir [Sécurité 2 : Mises à jour Automatiques avec Watchtower](https://kpihx-labs.github.io/presentation/#/tutos_live/security/2-automatisation-watchtower.md))
 
 ## [Décembre 2025] : Fondation & Survie
 - Récupération d'un laptop AMD (écran brisé).
 - Installation de **Proxmox VE 8**. (Voir [Tuto 1 : Déploiement Proxmox sur Réseau Sécurisé (802.1X Filaire)](https://kpihx-labs.github.io/presentation/#/tutos_live/1-deploiement-proxmox-8021x.md))
 - Hack de l'auth 802.1X via `wpa_supplicant` et OpenSSL `SECLEVEL=0`. (Voir [Tuto 1](https://kpihx-labs.github.io/presentation/#/tutos_live/1-deploiement-proxmox-8021x.md))
-- Première sécurisation SSH (Port 2222, clés uniquement). (Voir [Sécurité 3 : Le Bouclier d'Inactivité (Auto-Logout & SSH)](https://kpihx-labs.github.io/presentation/#/tutos_live/security/3-bouclier-inactivite-ssh.md))
+- Première sécurisation SSH (Port 2222, clés uniquement). (Voir [Sécurité 3 : Le Bouclier d'Inactivité (Auto-Logout & SSH Timeout)](https://kpihx-labs.github.io/presentation/#/tutos_live/security/3-bouclier-inactivite-ssh.md))
 
 ---
 ## 🗺️ Navigation
@@ -44,7 +46,6 @@
 - [🔭 Vision](https://kpihx-labs.github.io/presentation/#/VISION.md)
 - [🏗️ État de l'Art](https://kpihx-labs.github.io/presentation/#/STATE_OF_THE_ART.md)
 - [🕒 Évolution](https://kpihx-labs.github.io/presentation/#/EVOLUTION.md)
-- [💡 Ideas](https://kpihx-labs.github.io/presentation/#/IDEAS.md)
 - [🚀 Live Tutorials](https://kpihx-labs.github.io/presentation/#/tutos_live/README.md)
 - [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
 - [🤖 Agent Mandate](https://kpihx-labs.github.io/presentation/#/AGENT.md)
