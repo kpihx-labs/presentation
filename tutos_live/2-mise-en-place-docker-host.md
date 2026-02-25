@@ -97,7 +97,7 @@ Pour ne plus jamais avoir à retenir l'IP (qui peut changer), on installe Avahi 
 ### B. Ingénierie SSH (~/.ssh/config)
 C'est le "tableau de bord" de votre PC administrateur.
 
-*   **Template complet :** `templates/ssh_config`
+*   **Template complet :** `https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/ssh_config`
 
 Ce fichier magique vous permet de définir :
 - `homelab` : l'accès physique.
@@ -113,7 +113,7 @@ Traefik est le cerveau de l'usine. Il reçoit tout le trafic Web, gère les cert
 
 **✅ Déploiement via Portainer (Stack "traefik") :**
 1. Générez un hash pour protéger l'interface : `htpasswd -nb user password`. *(Note : Doublez les `$` dans le yaml : `$$apr1$$...`)*
-2. Récupérez le fichier **Template :** `templates/traefik.yaml`.
+2. Récupérez le fichier **Template :** `https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/traefik.yaml`.
 3. Déployez-le. Traefik commencera immédiatement à écouter les événements Docker.
 
 ---

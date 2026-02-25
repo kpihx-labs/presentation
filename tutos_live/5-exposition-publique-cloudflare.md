@@ -16,7 +16,7 @@ Le Tunnel est un "pont" initié par votre serveur **vers** Cloudflare. Comme c'e
 
 **✅ La Solution :**
 1. **Cloudflare Zero Trust :** Créez un tunnel et copiez le `TUNNEL_TOKEN`.
-2. **Déploiement Docker :** Récupérez le **Template :** `templates/cloudflared.yaml`.
+2. **Déploiement Docker :** Récupérez le **Template :** `https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/cloudflared.yaml`.
 3. **Important :** N'oubliez pas les variables `NO_PROXY=traefik` et le protocole `--protocol http2` dans votre configuration finale pour que le tunnel puisse parler au proxy en interne et traverser l'X.
 
 ---

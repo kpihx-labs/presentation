@@ -11,7 +11,7 @@
 Watchtower est un conteneur qui scanne vos images Docker. S'il en trouve une plus récente sur le Hub, il télécharge l'image, redémarre votre service avec exactement la même config, et fait le ménage.
 
 **✅ La Solution :**
-1. **Déploiement :** Utilisez le template `templates/watchtower.yaml`.
+1. **Déploiement :** Utilisez le template `https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/watchtower.yaml`.
 2. **Réglage :** On le programme à 5h du matin, juste après la maintenance système.
 
 ---

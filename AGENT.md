@@ -19,7 +19,7 @@ Chaque fichier dans `tutos_live/` doit respecter ce format unifié :
 2.  **Narratif Intuitif :** Le lecteur doit comprendre *pourquoi* on choisit telle option de commande plutôt qu'une autre.
 3.  **100% Exhaustivité :** On doit pouvoir réinitialiser tout le lab à partir de zéro sans connaissance préalable. Aucune étape n'est "trop évidente".
 4.  **Hacks Documentés :** Les solutions "sales" mais vitales (ex: SECLEVEL=0) doivent être mises en avant car elles sont la clé de la réussite. Documentez-les avec leur "Pourquoi".
-5.  **Débogage Intégré :** Chaque tuto doit inclure une section "Cas de débogage" pour anticiper les erreurs classiques.
+5.  **Débogage Intégré :** Chaque tuto doit include une section "Cas de débogage" pour anticiper les erreurs classiques.
 6.  **Liens vers Templates :** Les fichiers de configuration volumineux ou scripts doivent être externalisés dans `templates/` et simplement référencés dans le fichier MD.
 
 ## ⚙️ Règles de Mise à Jour (CRITIQUE)
@@ -31,3 +31,10 @@ Chaque fichier dans `tutos_live/` doit respecter ce format unifié :
 - **Web Showcase (Docsify) :** Ce dossier est configuré pour être servi via Docsify. Chaque nouveau fichier `.md` doit être ajouté à la barre latérale dans `_sidebar.md` pour apparaître sur le site web public.
 - **CI/CD Deployment :** Le push vers GitLab déclenche un pipeline qui importe les scripts réels depuis le repo `scripts` vers `live_scripts/` et déploie le tout sur la branche `gh-pages` de GitHub. Ne jamais modifier manuellement le dossier `live_scripts/`, il est géré par l'automation.
 - **Évolution Continue :** Si un nouveau service est déployé, il doit faire l'objet d'un nouveau fichier dans `tutos_live/` suivant ce même standard, et ses configurations doivent enrichir `templates/`.
+
+---
+## 🗺️ Navigation
+- [🏠 Accueil](README.md)
+- [🔭 Vision](VISION.md)
+- [🏗️ État de l'Art](STATE_OF_THE_ART.md)
+- [🕒 Évolution](EVOLUTION.md)

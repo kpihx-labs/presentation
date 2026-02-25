@@ -48,7 +48,7 @@ La plupart de vos futurs projets (Django, FastAPI) auront besoin d'une base de d
 
 **✅ La Solution :**
 Déployez la stack **PostgreSQL + Adminer** via Portainer.
-*   **Template :** `templates/postgres_adminer.yaml`
+*   **Template :** `https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/postgres_adminer.yaml`
 *   **Détail Vital :** Adminer permet de visualiser vos tables sans installer de logiciel sur votre PC.
 
 ---
@@ -73,9 +73,9 @@ gitlab-runner register --url "https://gitlab.com" --token "VOTRE_TOKEN" --execut
 
 **3. Le Pipeline Magique :**
 Dans chaque projet, déposez un fichier `.gitlab-ci.yml`.
-*   **Template Déploiement :** `templates/gitlab-ci-deploy.yaml` (Déploiement simple sur le lab).
-*   **Template Miroir GitHub :** `templates/gitlab-sync.yaml` (Pour garder votre portfolio GitHub à jour automatiquement).
-*   **Template Complet (Deploy + Sync) :** `templates/gitlab-ci-deploy-sync.yaml` (La solution industrielle totale).
+*   **Template Déploiement :** `https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/gitlab-ci-deploy.yaml` (Déploiement simple sur le lab).
+*   **Template Miroir GitHub :** `https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/gitlab-sync.yaml` (Pour garder votre portfolio GitHub à jour automatiquement).
+*   **Template Complet (Deploy + Sync) :** `https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/gitlab-ci-deploy-sync.yaml` (La solution industrielle totale).
 
 ---
 

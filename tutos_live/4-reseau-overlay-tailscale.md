@@ -18,7 +18,7 @@ Dans le conteneur Docker, le résolveur principal est **Tailscale** (présent au
 Pour ce qui revient au serveur (`.homelab`), c'est le conteneur **AdGuard** (notre DNS local) qui prend le relais. Il gère aussi l'**Upstream DNS**. Résultat : Le jour où le serveur quitte l'X pour une box internet standard, la seule chose à modifier, ce sont les IP des serveurs Upstream DNS dans AdGuard et le Nameserver Global de Tailscale. Le conteneur Docker, lui, n'a jamais su qu'il était à l'X.
 
 **✅ La Solution :**
-1. **Déploiement :** Récupérez le **Template :** `templates/adguard.yaml` et déployez-le via Portainer.
+1. **Déploiement :** Récupérez le **Template :** `https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/adguard.yaml` et déployez-le via Portainer.
 2. **DNS Rewrite :** Dans l'interface AdGuard (port 3000), allez dans *Filtres > Réécritures DNS*. Ajoutez une règle : `*.homelab` ➔ IP Tailscale de votre serveur.
 3. **Upstream DNS (Le Pivot) :** Configurez AdGuard pour qu'il demande aux serveurs de l'école (`129.104.30.41`) quand il ne connaît pas une adresse.
 
@@ -30,7 +30,7 @@ Pour ce qui revient au serveur (`.homelab`), c'est le conteneur **AdGuard** (not
 Tailscale crée un réseau privé virtuel (Overlay) entre vos appareils. Même si votre serveur change d'IP à l'école, son IP Tailscale (`100.x.y.z`) reste **fixe** et accessible de partout.
 
 **✅ La Solution :**
-1. **Déploiement :** Utilisez le **Template :** `templates/tailscale.yaml`.
+1. **Déploiement :** Utilisez le **Template :** `https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/tailscale.yaml`.
 2. **Mode Userspace :** Vital dans un conteneur LXC pour éviter de casser le kernel Proxmox (`TS_USERSPACE=true`).
 3. **Subnet Router :** Dans la console Tailscale (Web), activez la route `10.10.10.0/24`. Cela permet à votre téléphone de "voir" tous vos conteneurs Docker comme s'ils étaient à côté de lui.
 
