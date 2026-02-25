@@ -28,7 +28,7 @@ Development follows a strict **PC ➔ GitLab ➔ Homelab** workflow:
 
 ## 🌐 Live Showcase
 The documentation is dynamically served via **Docsify** at:
-👉 **[https://kpihx-labs.github.io/presentation](https://kpihx-labs.github.io/presentation)**
+👉 **[https://kpihx-labs.github.io/presentation](https://kpihx-labs.github.io/presentation/#/README.md)**
 
 ## 🔐 CI/CD Secret Variables
 To function, the GitLab pipelines require the following variables defined in the Group/Project settings:
@@ -37,21 +37,12 @@ To function, the GitLab pipelines require the following variables defined in the
 - `DB_PASS`: Master password for the PostgreSQL stack.
 - `GITHUB_TOKEN`: Classic token with `repo` and `admin:org` scopes for mirroring.
 - `SSH_USER`: The administrative user (e.g., `ivann`) for bastion access.
-
-## 📚 Documentation Map
-- [🔭 Full Vision](VISION.md) — The strategic soul of the project.
-- [🏗️ State of the Art](STATE_OF_THE_ART.md) — Detailed technical map.
-- [🕒 Evolution](EVOLUTION.md) — Chronological engineering log.
-- [🚀 Live Tutorials](tutos_live/README.md) — Step-by-step implementation guides.
-- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates) — Generic configuration files.
-
-
 ---
 ## 🗺️ Navigation
-- [🏠 Accueil](README.md)
-- [🔭 Vision](VISION.md)
-- [🏗️ État de l'Art](STATE_OF_THE_ART.md)
-- [🕒 Évolution](EVOLUTION.md)
-- [🚀 Live Tutorials](tutos_live/README.md)
+- [🏠 Accueil](https://kpihx-labs.github.io/presentation/#/README.md)
+- [🔭 Vision](https://kpihx-labs.github.io/presentation/#/VISION.md)
+- [🏗️ État de l'Art](https://kpihx-labs.github.io/presentation/#/STATE_OF_THE_ART.md)
+- [🕒 Évolution](https://kpihx-labs.github.io/presentation/#/EVOLUTION.md)
+- [🚀 Live Tutorials](https://kpihx-labs.github.io/presentation/#/tutos_live/README.md)
 - [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
-- [🤖 Agent Mandate](AGENT.md)
+- [🤖 Agent Mandate](https://kpihx-labs.github.io/presentation/#/AGENT.md)

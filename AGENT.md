@@ -5,10 +5,10 @@ Ce dossier est la mémoire atomique et pédagogique de KpihX Labs. Il ne doit su
 Ce dossier est la "Boîte Noire" et le Manuel d'Instruction de KpihX Labs.
 
 ### 🏛️ Hiérarchie de Consultation
-1.  **VISION.md :** L'âme du projet et la stratégie long terme. À lire pour comprendre le "Pourquoi" profond, de façon narrative et intuitive (le passage de l'île du local à la presqu'île du cloud, la place de l'IA, l'équipe).
-2.  **STATE_OF_THE_ART.md :** La carte technique actuelle. À lire pour comprendre "Comment" tout est relié (l'infrastructure, les contraintes, les choix techniques comme le Split DNS, le réseau overlay).
-3.  **EVOLUTION.md :** Le journal de bord. À lire pour la chronologie et l'historique des changements, de façon rigoureuse et ordonnée.
-4.  **tutos_live/ :** Le manuel d'instruction. À lire pour reproduire, dépanner ou faire évoluer techniquement un service.
+1.  **[VISION.md](https://kpihx-labs.github.io/presentation/#/VISION.md) :** L'âme du projet et la stratégie long terme. À lire pour comprendre le "Pourquoi" profond, de façon narrative et intuitive (le passage de l'île du local à la presqu'île du cloud, la place de l'IA, l'équipe).
+2.  **[STATE_OF_THE_ART.md](https://kpihx-labs.github.io/presentation/#/STATE_OF_THE_ART.md) :** La carte technique actuelle. À lire pour comprendre "Comment" tout est relié (l'infrastructure, les contraintes, les choix techniques comme le Split DNS, le réseau overlay).
+3.  **[EVOLUTION.md](https://kpihx-labs.github.io/presentation/#/EVOLUTION.md) :** Le journal de bord. À lire pour la chronologie et l'historique des changements, de façon rigoureuse et ordonnée.
+4.  **[tutos_live/](https://kpihx-labs.github.io/presentation/#/tutos_live/README.md) :** Le manuel d'instruction. À lire pour reproduire, dépanner ou faire évoluer techniquement un service.
     - `security/` : Dossier dédié à la forteresse numérique (sauvegardes, mises à jour, timeout).
     - `annexes/` : Scripts de survie et outils mobiles (Watchdog, Termux).
     - `templates/` : Fichiers de configuration bruts, externalisés des tutoriels. Ils doivent toujours être des environnements ouverts, bien commentés en anglais sur toutes les options possibles (commentables, décommentables) et les prérequis. Les exemples utilisent `homelab`, `kpihx-labs`, `kpihx`, `ivann`.
@@ -28,19 +28,17 @@ Chaque fichier dans `tutos_live/` doit respecter ce format unifié :
 - **Zéro Suppression :** Sauf demande explicite de l'utilisateur, aucune donnée ne doit disparaître. Jamais de compression, jamais de synthèse. On augmente toujours l'information.
 - **Vérification Réelle :** L'agent a carte blanche pour scanner le serveur (via `ssh kpihx-labs`) ou le conteneur (via `ssh docker-host`) pour confirmer les noms de conteneurs, voir les logs, inspecter les états Docker (images, volumes), et vérifier que les tutos correspondent parfaitement à la réalité. C'est le moyen ultime de lever toute zone d'ombre.
 - **Synchronisation Globale :** Tout changement validé dans l'infrastructure doit être répercuté dans le `CHANGELOG` (`EVOLUTION.md`), puis dans `STATE_OF_THE_ART.md`, et enfin dans le tutoriel correspondant. Inversement, toute modification d'un tutoriel dans `tutos_live/` DOIT entraîner une mise à jour des sections correspondantes dans `STATE_OF_THE_ART.md`, `EVOLUTION.md` et potentiellement `VISION.md` pour garantir une cohérence arborescente totale.
-- **Web Showcase (Docsify) :** Ce dossier est configuré pour être servi via Docsify. Chaque nouveau fichier `.md` créé, renommé ou déplacé DOIT être immédiatement répercuté dans la barre latérale [_sidebar.md](_sidebar.md) pour apparaître sur le site web public. De plus, tout nouveau tutoriel ou annexe doit être ajouté avec son titre complet dans l'index [tutos_live/README.md](tutos_live/README.md).
+- **Web Showcase (Docsify) :** Ce dossier est configuré pour être servi via Docsify. Chaque nouveau fichier `.md` créé, renommé ou déplacé DOIT être immédiatement répercuté dans la barre latérale `_sidebar.md` pour apparaître sur le site web public. De plus, tout nouveau tutoriel ou annexe doit être ajouté avec son titre complet dans l'index [tutos_live/README.md](https://kpihx-labs.github.io/presentation/#/tutos_live/README.md).
 - **Navigation Unifiée :** Chaque fichier Markdown créé ou modifié DOIT comporter le bloc de navigation standard à la fin pour permettre un retour fluide vers les piliers de la documentation.
 - **Transparence des Liens :** Dans les fichiers de synthèse (`VISION`, `STATE_OF_THE_ART`, `EVOLUTION`), les liens vers les tutoriels ne doivent jamais être génériques (ex: "Tuto 1"). Ils doivent impérativement utiliser le titre complet et riche du fichier cible pour une clarté maximale.
 - **CI/CD Deployment :** Le push vers GitLab déclenche un pipeline qui synchronise la branche `gh-pages` de GitHub. Les scripts de production sont liés directement au dépôt `scripts` de l'organisation GitHub pour éviter les duplications.
 - **Évolution Continue :** Si un nouveau service est déployé, il doit faire l'objet d'un nouveau fichier dans `tutos_live/` suivant ce même standard, et ses configurations doivent enrichir `templates/`.
-
-
 ---
 ## 🗺️ Navigation
-- [🏠 Accueil](README.md)
-- [🔭 Vision](VISION.md)
-- [🏗️ État de l'Art](STATE_OF_THE_ART.md)
-- [🕒 Évolution](EVOLUTION.md)
-- [🚀 Live Tutorials](tutos_live/README.md)
+- [🏠 Accueil](https://kpihx-labs.github.io/presentation/#/README.md)
+- [🔭 Vision](https://kpihx-labs.github.io/presentation/#/VISION.md)
+- [🏗️ État de l'Art](https://kpihx-labs.github.io/presentation/#/STATE_OF_THE_ART.md)
+- [🕒 Évolution](https://kpihx-labs.github.io/presentation/#/EVOLUTION.md)
+- [🚀 Live Tutorials](https://kpihx-labs.github.io/presentation/#/tutos_live/README.md)
 - [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
-- [🤖 Agent Mandate](AGENT.md)
+- [🤖 Agent Mandate](https://kpihx-labs.github.io/presentation/#/AGENT.md)
