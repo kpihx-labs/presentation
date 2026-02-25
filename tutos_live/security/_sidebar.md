@@ -3,6 +3,7 @@
   - [🔭 Vision](/VISION.md)
   - [🏗️ État de l'Art](/STATE_OF_THE_ART.md)
   - [🕒 Évolution](/EVOLUTION.md)
+  - [💡 Ideas](/IDEAS.md)
   - [🤖 Agent Mandate](/AGENT.md)
 
 - **Tutos Live**
