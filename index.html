@@ -18,12 +18,21 @@
       loadSidebar: true,      // Active la barre de navigation gauche
       subMaxLevel: 2,         // Niveau de profondeur des titres dans la barre
       auto2top: true,         // Remonte en haut à chaque changement de page
-      themeColor: '#3F51B5'   // Couleur d'accentuation (Indigo)
+      themeColor: '#3F51B5',  // Couleur d'accentuation (Indigo)
+      search: {
+        maxAge: 86400000,     // Expiration de l'index (1 jour)
+        paths: 'auto',
+        placeholder: '🚀 Explorer l\'odyssée... aux antipodes du cloud classique',
+        noData: '❌ Aucun vestige trouvé dans la base.',
+        depth: 6,
+        hideOtherSidebarContent: false,
+      }
     }
   </script>
   <!-- Moteur Docsify -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  <!-- Plugins de coloration syntaxique pour tes scripts et templates -->
+  <!-- Plugins -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js"></script>
