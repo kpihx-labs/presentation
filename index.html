@@ -14,11 +14,14 @@
   <script>
     window.$docsify = {
       name: 'KpihX Labs',
-      repo: 'https://github.com/KpihX-Lab/presentation',
+      repo: 'https://github.com/kpihx-labs/presentation',
       loadSidebar: true,      // Active la barre de navigation gauche
       subMaxLevel: 2,         // Niveau de profondeur des titres dans la barre
       auto2top: true,         // Remonte en haut à chaque changement de page
-      themeColor: '#3F51B5'   // Couleur d'accentuation (Indigo)
+      themeColor: '#3F51B5',  // Couleur d'accentuation (Indigo)
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md' // Force la sidebar racine partout
+      }
     }
   </script>
   <!-- Moteur Docsify -->
