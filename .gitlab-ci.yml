@@ -6,7 +6,6 @@ stages:
 
 github_pages:
   stage: deploy_pages
-  # The tags ensures it runs on your local Docker-host runner
   tags:
     - homelab
   variables:
@@ -15,39 +14,38 @@ github_pages:
   only:
     - main
   script:
-    - "echo '🚀 Preparing GitHub Pages deployment on local runner...'"
+    - "echo '🚀 Preparing GitHub Pages deployment...'"
     
-    # Configure local Git
+    # Configuration Git
     - "git config --global user.email 'ci@kpihx-labs.com'"
     - "git config --global user.name 'GitLab CI'"
     
-    # 1. Prepare gh-pages branch
+    # 1. Capture du commit actuel (la source)
+    - "CURRENT_SHA=$CI_COMMIT_SHA"
+    
+    # 2. Création de la branche gh-pages pour le site
     - "git branch -D gh-pages || true"
     - "git checkout -b gh-pages"
     
-    # 2. Fetch live scripts (using GITHUB_TOKEN for auth)
-    - "echo '📥 Fetching live scripts from GitHub kpihx-labs/scripts...'"
+    # 3. Import des scripts (Source de vérité)
+    - "echo '📥 Importing scripts...'"
     - "rm -rf temp_scripts live_scripts"
-    - "git clone https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_ORG}/scripts.git temp_scripts || echo '⚠️ Failed to clone scripts repo.'"
+    - "git clone https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_ORG}/scripts.git temp_scripts"
     - "mkdir -p live_scripts"
-    - "cp temp_scripts/*.sh live_scripts/ 2>/dev/null || echo 'ℹ️ No .sh files found to import.'"
+    - "cp temp_scripts/*.sh live_scripts/ 2>/dev/null || echo 'No scripts found.'"
     - "rm -rf temp_scripts"
     
-    # 3. Commit changes to gh-pages
+    # 4. Commit sur gh-pages (ajout des scripts importés)
     - "git add live_scripts/"
-    - "git commit -m 'Auto-import live scripts [skip ci]' || echo 'No scripts to update.'"
+    - "git commit -m 'Auto-import live scripts [skip ci]' || echo 'Nothing to update on gh-pages.'"
     
-    # 4. Ensure GitHub repo exists and push
-    - "echo '🔄 Syncing to GitHub...'"
-    - "sudo apt-get update -qq && sudo apt-get install -y -qq curl"
-    - "curl -s -H \"Authorization: token ${GITHUB_TOKEN}\" -X POST -d \"{\\\"name\\\":\\\"${REPO_NAME}\\\", \\\"private\\\":false}\" https://api.github.com/orgs/${GITHUB_ORG}/repos || echo 'ℹ️ Repo might already exist.'"
-    
-    # Set remote and push both branches
+    # 5. Synchronisation vers GitHub
+    - "echo '🔄 Pushing to GitHub...'"
     - "git remote remove github || true"
     - "git remote add github https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_ORG}/${REPO_NAME}.git"
     
-    - "echo '📤 Pushing to GitHub...'"
-    - "git push github main:main --force"
-    - "git push github gh-pages:gh-pages --force"
+    # Push de la source (main) et du site (gh-pages)
+    - "git push github $CURRENT_SHA:refs/heads/main --force"
+    - "git push github gh-pages:refs/heads/gh-pages --force"
     
-    - "echo '✅ Sync complete.'"
+    - "echo '✅ Deployment successful!'"
