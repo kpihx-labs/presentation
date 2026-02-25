@@ -19,7 +19,7 @@ Chaque fichier dans `tutos_live/` doit respecter ce format unifié :
 2.  **Narratif Intuitif :** Le lecteur doit comprendre *pourquoi* on choisit telle option de commande plutôt qu'une autre.
 3.  **100% Exhaustivité :** On doit pouvoir réinitialiser tout le lab à partir de zéro sans connaissance préalable. Aucune étape n'est "trop évidente".
 4.  **Hacks Documentés :** Les solutions "sales" mais vitales (ex: SECLEVEL=0) doivent être mises en avant car elles sont la clé de la réussite. Documentez-les avec leur "Pourquoi".
-5.  **Débogage Intégré :** Chaque tuto doit include une section "Cas de débogage" pour anticiper les erreurs classiques.
+5.  **Débogage Intégré :** Chaque tuto doit inclure une section "Cas de débogage" pour anticiper les erreurs classiques.
 6.  **Liens vers Templates :** Les fichiers de configuration volumineux ou scripts doivent être externalisés dans `templates/` et simplement référencés dans le fichier MD.
 
 ## ⚙️ Règles de Mise à Jour (CRITIQUE)
@@ -29,7 +29,7 @@ Chaque fichier dans `tutos_live/` doit respecter ce format unifié :
 - **Vérification Réelle :** L'agent a carte blanche pour scanner le serveur (via `ssh kpihx-labs`) ou le conteneur (via `ssh docker-host`) pour confirmer les noms de conteneurs, voir les logs, inspecter les états Docker (images, volumes), et vérifier que les tutos correspondent parfaitement à la réalité. C'est le moyen ultime de lever toute zone d'ombre.
 - **Synchronisation Globale :** Tout changement validé dans l'infrastructure doit être répercuté dans le `CHANGELOG` (`EVOLUTION.md`), puis dans `STATE_OF_THE_ART.md`, et enfin dans le tutoriel correspondant. Inversement, toute modification d'un tutoriel dans `tutos_live/` DOIT entraîner une mise à jour des sections correspondantes dans `STATE_OF_THE_ART.md`, `EVOLUTION.md` et potentiellement `VISION.md` pour garantir une cohérence arborescente totale.
 - **Web Showcase (Docsify) :** Ce dossier est configuré pour être servi via Docsify. Chaque nouveau fichier `.md` doit être ajouté à la barre latérale dans `_sidebar.md` pour apparaître sur le site web public.
-- **CI/CD Deployment :** Le push vers GitLab déclenche un pipeline qui importe les scripts réels depuis le repo `scripts` vers `live_scripts/` et déploie le tout sur la branche `gh-pages` de GitHub. Ne jamais modifier manuellement le dossier `live_scripts/`, il est géré par l'automation.
+- **CI/CD Deployment :** Le push vers GitLab déclenche un pipeline qui synchronise la branche `gh-pages` de GitHub. Les scripts de production sont liés directement au dépôt `scripts` de l'organisation GitHub pour éviter les duplications.
 - **Évolution Continue :** Si un nouveau service est déployé, il doit faire l'objet d'un nouveau fichier dans `tutos_live/` suivant ce même standard, et ses configurations doivent enrichir `templates/`.
 
 ---

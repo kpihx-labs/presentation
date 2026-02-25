@@ -16,36 +16,22 @@ github_pages:
   script:
     - "echo '🚀 Preparing GitHub Pages deployment...'"
     
-    # Configuration Git
+    # Configure Git
     - "git config --global user.email 'ci@kpihx-labs.com'"
     - "git config --global user.name 'GitLab CI'"
     
-    # 1. Capture du commit actuel (la source)
+    # 1. Prepare branches
     - "CURRENT_SHA=$CI_COMMIT_SHA"
-    
-    # 2. Création de la branche gh-pages pour le site
     - "git branch -D gh-pages || true"
     - "git checkout -b gh-pages"
     
-    # 3. Import des scripts (Source de vérité)
-    - "echo '📥 Importing scripts...'"
-    - "rm -rf temp_scripts live_scripts"
-    - "git clone https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_ORG}/scripts.git temp_scripts"
-    - "mkdir -p live_scripts"
-    - "cp temp_scripts/*.sh live_scripts/ 2>/dev/null || echo 'No scripts found.'"
-    - "rm -rf temp_scripts"
-    
-    # 4. Commit sur gh-pages (ajout des scripts importés)
-    - "git add live_scripts/"
-    - "git commit -m 'Auto-import live scripts [skip ci]' || echo 'Nothing to update on gh-pages.'"
-    
-    # 5. Synchronisation vers GitHub
+    # 2. Sync to GitHub
     - "echo '🔄 Pushing to GitHub...'"
     - "git remote remove github || true"
     - "git remote add github https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_ORG}/${REPO_NAME}.git"
     
-    # Push de la source (main) et du site (gh-pages)
+    # Push main source and gh-pages site
     - "git push github $CURRENT_SHA:refs/heads/main --force"
     - "git push github gh-pages:refs/heads/gh-pages --force"
     
-    - "echo '✅ Deployment successful!'"
+    - "echo '✅ Sync complete.'"

@@ -23,7 +23,7 @@
 Un serveur Linux accumule des images Docker inutiles et des logs qui saturent le disque. Une maintenance propre évite les reboots sauvages.
 
 **✅ La Solution :**
-1. **Script de Maintenance :** Le script de production est situé dans [live_scripts/maintenance.sh](https://github.com/kpihx-labs/presentation/blob/gh-pages/live_scripts/maintenance.sh).
+1. **Script de Maintenance :** Le script de production est situé dans [scripts/maintenance.sh](https://github.com/kpihx-labs/scripts/blob/main/maintenance.sh).
 2. **Fonctions :** Il gère les mises à jour APT, le nettoyage Docker (`prune -a`), et vous envoie une notification Telegram avant de déclencher un `reboot` propre pour rafraîchir le noyau et les ports USB.
 3. **Automatisation (Cron) :** Programmez l'exécution le samedi à 4h du matin (juste après le snapshot Proxmox) :
    ```bash
@@ -46,7 +46,7 @@ C'est votre première ligne de défense. Avant toute grosse maintenance, Proxmox
 Le serveur à l'X est physiquement inaccessible ou instable avec des disques USB. Votre PC Ubuntu sert de "Hub de Sauvegarde".
 
 **✅ La Solution :**
-1. **Script d'Exfiltration :** Le script de production est [live_scripts/backup_homelab.sh](https://github.com/kpihx-labs/presentation/blob/gh-pages/live_scripts/backup_homelab.sh).
+1. **Script d'Exfiltration :** Le script de production est [scripts/backup_homelab.sh](https://github.com/kpihx-labs/scripts/blob/main/backup_homelab.sh).
 2. **Optimisation RSYNC (Niveau 2) :** Utilisation de l'algorithme `aes128-gcm` (accélération matérielle) et désactivation de la compression SSH (inutile sur du `.zst`) pour une vitesse maximale.
 3. **Cloud Direct (Niveau 3) :** Le script n'utilise plus GVFS mais **Rclone** pour un upload direct et robuste vers Google Drive (`gdrive-full`).
 4. **Fonctionnement :**

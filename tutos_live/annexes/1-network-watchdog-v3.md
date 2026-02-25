@@ -8,7 +8,7 @@
 
 ## 🔍 LE PROTOCOLE DE RÉPARATION (LOGIQUE)
 
-Le script (situé dans [live_scripts/network_watchdog.sh](https://github.com/kpihx-labs/presentation/blob/gh-pages/live_scripts/network_watchdog.sh)) est un véritable "cerveau" capable de s'adapter à votre environnement. Il détecte automatiquement si vous êtes en **WI-FI** (via `wlo1` et le driver `nl80211`) ou en **FILAIRE** (via `nic1/vmbr0` et le driver `wired`) en analysant votre fichier `/etc/network/interfaces`.
+Le script (situé dans [scripts/network_watchdog.sh](https://github.com/kpihx-labs/scripts/blob/main/network_watchdog.sh)) est un véritable "cerveau" capable de s'adapter à votre environnement. Il détecte automatiquement si vous êtes en **WI-FI** (via `wlo1` et le driver `nl80211`) ou en **FILAIRE** (via `nic1/vmbr0` et le driver `wired`) en analysant votre fichier `/etc/network/interfaces`.
 
 Il suit ensuite une escalade de la force :
 1. **Action 0 :** Simple réveil des interfaces (`down/up`).
@@ -20,7 +20,7 @@ Il suit ensuite une escalade de la force :
 
 ## 🚀 MISE EN PLACE
 
-1. **Script :** Le script de production est maintenu dans [live_scripts/network_watchdog.sh](https://github.com/kpihx-labs/presentation/blob/gh-pages/live_scripts/network_watchdog.sh).
+1. **Script :** Le script de production est maintenu dans [scripts/network_watchdog.sh](https://github.com/kpihx-labs/scripts/blob/main/network_watchdog.sh).
 2. **Dépendances :** Il utilise un fichier `.env` local pour vos jetons Telegram.
 3. **Droits :** `chmod +x /root/network_watchdog.sh` (Copie du script vers root recommandée).
 4. **Automatisation :** Ajoutez au crontab de root :
