@@ -42,8 +42,8 @@ To function, the GitLab pipelines require the following variables defined in the
 - [🔭 Full Vision](VISION.md) — The strategic soul of the project.
 - [🏗️ State of the Art](STATE_OF_THE_ART.md) — Detailed technical map.
 - [🕒 Evolution](EVOLUTION.md) — Chronological engineering log.
-- [🚀 Live Tutorials](tutos_live/) — Step-by-step implementation guides.
-- [🛠️ Templates](tutos_live/templates/) — Generic configuration files.
+- [🚀 Live Tutorials](https://github.com/kpihx-labs/presentation/tree/main/tutos_live) — Step-by-step implementation guides.
+- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates) — Generic configuration files.
 
 ---
 *Built with ❤️ and persistence by KpihX.*
