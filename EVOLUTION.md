@@ -1,5 +1,11 @@
 # 🕒 Évolution : Chronologie de l'Ingénierie
 
+## [Février 2026] : L'Ère de l'Auto-Validation et de l'Expérience Web
+- **Unification de la Navigation :** Transition critique vers des **URLs web absolues** sur l'ensemble du dépôt. Résolution définitive des erreurs 404.
+- **Usine de Validation :** Mise en place de scripts de tests full-verbose (`check_links.sh`, `check_templates.sh`, `check_tutos.sh`) pour garantir l'intégrité du maillage technique.
+- **Intelligence Documentaire :** Intégration d'un moteur de recherche full-text et d'un thème sombre dynamique.
+- **Consolidation du Mandat Agent :** Inscription de la philosophie de reproductibilité par scripts et de proactivité dans `AGENT.md`.
+
 ## [Décembre 2025] : Fondation & Survie
 - Récupération d'un laptop AMD (écran brisé).
 - Installation de **Proxmox VE 8**. (Voir [Tuto 1 : Déploiement Proxmox sur Réseau Sécurisé (802.1X Filaire)](https://kpihx-labs.github.io/presentation/#/tutos_live/1-deploiement-proxmox-8021x.md))

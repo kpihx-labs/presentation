@@ -40,6 +40,12 @@ Chaque fichier dans `tutos_live/` doit respecter ce format unifié :
     3. **Full Verbose :** Tous les scripts créés doivent être **full verbose** par défaut. Ils doivent imprimer chaque étape franchie, les fichiers scannés, et le détail des succès/échecs pour une transparence totale.
     4. Exécuter ce script.
     5. Ces scripts font office de tests. **Avant chaque commit majeur, il faut impérativement relancer ces scripts de validation** pour s'assurer que l'intégrité de la documentation n'est pas compromise (liens brisés, templates non référencés, tutos orphelins).
+- **Proactivité & Évolution Stratégique :** L'agent n'est pas un simple exécutant. Après avoir terminé une tâche technique, l'agent DOIT analyser l'impact de son travail sur l'ensemble de la documentation. Il DOIT systématiquement proposer :
+    *   La mise à jour d'un tutoriel existant (`tutos_live/`) si la méthode a changé.
+    *   La création d'un nouveau tutoriel si une nouvelle brique d'infrastructure a été posée.
+    *   L'actualisation ou la création d'un template dans `templates/`.
+    *   Une suggestion d'amélioration dans `IDEAS.md`.
+    L'agent doit rester proactif pour garantir que la "Boîte Noire" est toujours le reflet exact et vivant de la production.
 ---
 ## 🗺️ Navigation
 - [🏠 Accueil](https://kpihx-labs.github.io/presentation/#/README.md)

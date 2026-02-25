@@ -6,8 +6,27 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="KpihX Labs - Sovereign Cloud Journey">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <!-- Thème Darklight pour basculement clair/sombre -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css" title="docsify-darklight-theme" type="text/css" />
+  <style>
+    /* Correction de l'ordre : Nom au-dessus de la recherche */
+    .sidebar > h1 {
+      order: 1 !important;
+      margin-bottom: 0 !important;
+    }
+    .search {
+      order: 2 !important;
+    }
+    .sidebar-nav {
+      order: 3 !important;
+    }
+    /* Style de l'interrupteur de thème */
+    #docsify-darklight-theme {
+      top: 10px !important;
+      right: 10px !important;
+      width: 30px !important;
+      height: 30px !important;
+    }
+  </style>
 </head>
 <body>
   <div id="app">Chargement de KpihX Labs...</div>
@@ -18,56 +37,37 @@
       loadSidebar: true,
       subMaxLevel: 2,
       auto2top: true,
-      themeColor: '#3F51B5', // Indigo
+      themeColor: '#3F51B5',
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md' // BARRE LATÉRALE UNIQUE
+      },
       search: {
         maxAge: 86400000,
         paths: 'auto',
-        placeholder: '🚀 Explorer l\'odyssée... aux antipodes du cloud classique',
-        noData: '❌ Aucun vestige trouvé dans la base.',
-        depth: 6,
-        hideOtherSidebarContent: false,
+        placeholder: '🚀 Explorer l\'odyssée...',
+        noData: '❌ Aucun vestige trouvé.',
+        depth: 6
       },
       darklightTheme: {
         siteFont : "PT Sans",
-        defaultTheme : 'dark', // Mode sombre par défaut
+        defaultTheme : 'dark',
         codeFontFamily : 'Roboto Mono, Monaco, courier, monospace',
         bodyFontSize : '17px',
         dark: {
           accent: '#3F51B5',
-          toogleBackground : '#ffffff',
           background: '#091a28',
-          textColor: '#b0b1b1',
-          codeTextColor : '#ffffff',
-          codeBackgroundColor : '#0e2233',
-          borderColor : '#0d2538',
-          blockQuoteColor : '#858585',
-          highlightColor : '#d22778',
-          sidebarSubColor : '#b0b1b1',
-          codeTypeColor : '#ffffff',
           toogleImage : 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/sun.svg)'
         },
         light: {
           accent: '#3F51B5',
-          toogleBackground : '#091a28',
           background: '#ffffff',
-          textColor: '#34495e',
-          codeTextColor : '#525252',
-          codeBackgroundColor : '#f8f8f8',
-          borderColor : 'rgba(0,0,0,.07)',
-          blockQuoteColor : '#858585',
-          highlightColor : '#d22778',
-          sidebarSubColor : '#b0b1b1',
-          codeTypeColor : '#091a28',
           toogleImage : 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/moon.svg)'
         }
       }
     }
   </script>
-  <!-- Moteur Docsify -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  <!-- Plugin Darklight -->
   <script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js" type="text/javascript"></script>
-  <!-- Plugins -->
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
