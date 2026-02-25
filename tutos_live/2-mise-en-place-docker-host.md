@@ -130,3 +130,11 @@ Pour que votre PC puisse résoudre `traefik.homelab`, vous devez modifier votre 
 1. Lancez le tunnel : `ssh -N homelab-ui`.
 2. Ouvrez : `https://traefik.homelab:8443`.
 3. Si le dashboard Traefik s'affiche, votre usine logicielle est prête !
+
+---
+## 🗺️ Navigation
+- [🏠 Accueil](../README.md)
+- [🔭 Vision](../VISION.md)
+- [🏗️ État de l'Art](../STATE_OF_THE_ART.md)
+- [🕒 Évolution](../EVOLUTION.md)
+- [🤖 Agent Mandate](../AGENT.md)

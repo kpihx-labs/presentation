@@ -29,3 +29,11 @@ labels:
 ```
 
 **Verdict :** Votre infrastructure est toujours fraîche et sécurisée, sans effort manuel. 🛡️✨
+
+---
+## 🗺️ Navigation
+- [🏠 Accueil](../../README.md)
+- [🔭 Vision](../../VISION.md)
+- [🏗️ État de l'Art](../../STATE_OF_THE_ART.md)
+- [🕒 Évolution](../../EVOLUTION.md)
+- [🤖 Agent Mandate](../../AGENT.md)

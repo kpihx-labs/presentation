@@ -56,3 +56,11 @@ Le serveur à l'X est physiquement inaccessible ou instable avec des disques USB
    *   Nettoie le Cloud pour ne garder qu'un seul exemplaire.
 
 **Verdict :** Si votre serveur brûle demain, vos données sont à l'abri sur votre HDD et dans le Cloud. 🛡️🔥
+
+---
+## 🗺️ Navigation
+- [🏠 Accueil](../../README.md)
+- [🔭 Vision](../../VISION.md)
+- [🏗️ État de l'Art](../../STATE_OF_THE_ART.md)
+- [🕒 Évolution](../../EVOLUTION.md)
+- [🤖 Agent Mandate](../../AGENT.md)

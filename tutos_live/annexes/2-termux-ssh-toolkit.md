@@ -27,3 +27,11 @@ Pour que ce soit confortable, votre config SSH Termux doit être calquée sur ce
 *   **Host `docker-host` :** Via ProxyJump.
 
 **Verdict :** Votre homelab est littéralement dans votre poche, stable et auto-réparable. 📱🛡️
+
+---
+## 🗺️ Navigation
+- [🏠 Accueil](../../README.md)
+- [🔭 Vision](../../VISION.md)
+- [🏗️ État de l'Art](../../STATE_OF_THE_ART.md)
+- [🕒 Évolution](../../EVOLUTION.md)
+- [🤖 Agent Mandate](../../AGENT.md)

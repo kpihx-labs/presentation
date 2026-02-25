@@ -31,3 +31,11 @@ Il suit ensuite une escalade de la force :
 **Détail Vital :** Le script utilise un **Lockfile** (`/tmp/network_fixing.lock`) pour éviter que deux instances ne se lancent en même temps. Si une réparation dure plus de 15 minutes, le verrou est automatiquement cassé pour permettre une nouvelle tentative.
 
 **Verdict :** Depuis la V3 de ce watchdog, le serveur a une disponibilité de 99.9% même sur un réseau instable. Il vous préviendra même sur Telegram si votre IP publique change ! 🛡️🛰️
+
+---
+## 🗺️ Navigation
+- [🏠 Accueil](../../README.md)
+- [🔭 Vision](../../VISION.md)
+- [🏗️ État de l'Art](../../STATE_OF_THE_ART.md)
+- [🕒 Évolution](../../EVOLUTION.md)
+- [🤖 Agent Mandate](../../AGENT.md)

@@ -94,3 +94,11 @@ git add . && git commit -m "Import initial" && git push -u origin main
 ```
 
 **Verdict :** Votre homelab est maintenant une usine automatisée. Un push, et la magie opère. 🛡️🚀
+
+---
+## 🗺️ Navigation
+- [🏠 Accueil](../README.md)
+- [🔭 Vision](../VISION.md)
+- [🏗️ État de l'Art](../STATE_OF_THE_ART.md)
+- [🕒 Évolution](../EVOLUTION.md)
+- [🤖 Agent Mandate](../AGENT.md)

@@ -77,3 +77,11 @@ Oui, sauf si vous utilisez **Tmux**.
 4. **Le retour :** À votre reconnexion, tapez `tmux a -t maintenance` et vous retrouvez tout exactement là où vous l'avez laissé.
 
 **Verdict :** Ton infrastructure est maintenant protégée contre l'oubli humain. La forteresse se verrouille d'elle-même dès que tu tournes le dos. 🚀🛡️
+
+---
+## 🗺️ Navigation
+- [🏠 Accueil](../../README.md)
+- [🔭 Vision](../../VISION.md)
+- [🏗️ État de l'Art](../../STATE_OF_THE_ART.md)
+- [🕒 Évolution](../../EVOLUTION.md)
+- [🤖 Agent Mandate](../../AGENT.md)

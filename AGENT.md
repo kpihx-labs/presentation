@@ -28,7 +28,8 @@ Chaque fichier dans `tutos_live/` doit respecter ce format unifié :
 - **Zéro Suppression :** Sauf demande explicite de l'utilisateur, aucune donnée ne doit disparaître. Jamais de compression, jamais de synthèse. On augmente toujours l'information.
 - **Vérification Réelle :** L'agent a carte blanche pour scanner le serveur (via `ssh kpihx-labs`) ou le conteneur (via `ssh docker-host`) pour confirmer les noms de conteneurs, voir les logs, inspecter les états Docker (images, volumes), et vérifier que les tutos correspondent parfaitement à la réalité. C'est le moyen ultime de lever toute zone d'ombre.
 - **Synchronisation Globale :** Tout changement validé dans l'infrastructure doit être répercuté dans le `CHANGELOG` (`EVOLUTION.md`), puis dans `STATE_OF_THE_ART.md`, et enfin dans le tutoriel correspondant. Inversement, toute modification d'un tutoriel dans `tutos_live/` DOIT entraîner une mise à jour des sections correspondantes dans `STATE_OF_THE_ART.md`, `EVOLUTION.md` et potentiellement `VISION.md` pour garantir une cohérence arborescente totale.
-- **Web Showcase (Docsify) :** Ce dossier est configuré pour être servi via Docsify. Chaque nouveau fichier `.md` doit être ajouté à la barre latérale dans `_sidebar.md` pour apparaître sur le site web public.
+- **Web Showcase (Docsify) :** Ce dossier est configuré pour être servi via Docsify. Chaque nouveau fichier `.md` doit être ajouté à la barre latérale dans `_sidebar.md` pour apparaître sur le site web public. De plus, tout nouveau tutoriel ou annexe doit être ajouté manuellement dans l'index [tutos_live/README.md](tutos_live/README.md).
+- **Navigation Unifiée :** Chaque fichier Markdown créé ou modifié DOIT comporter le bloc de navigation standard à la fin pour permettre un retour fluide vers les piliers de la documentation.
 - **CI/CD Deployment :** Le push vers GitLab déclenche un pipeline qui synchronise la branche `gh-pages` de GitHub. Les scripts de production sont liés directement au dépôt `scripts` de l'organisation GitHub pour éviter les duplications.
 - **Évolution Continue :** Si un nouveau service est déployé, il doit faire l'objet d'un nouveau fichier dans `tutos_live/` suivant ce même standard, et ses configurations doivent enrichir `templates/`.
 
@@ -38,3 +39,4 @@ Chaque fichier dans `tutos_live/` doit respecter ce format unifié :
 - [🔭 Vision](VISION.md)
 - [🏗️ État de l'Art](STATE_OF_THE_ART.md)
 - [🕒 Évolution](EVOLUTION.md)
+- [🤖 Agent Mandate](AGENT.md)
