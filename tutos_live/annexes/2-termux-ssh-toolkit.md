@@ -80,7 +80,7 @@ Host docker-host
 Comme Android ne supporte pas mDNS, nous utilisons un script qui scanne une plage d'IP autour de la dernière connue, vérifie le **fingerprint SSH** du serveur, et met à jour automatiquement votre config.
 
 **Mise en place :**
-1.  **Template complet :** [https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/homelab_finder.sh](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/homelab_finder.sh)
+1.  **Template complet :** [templates/homelab_finder.sh](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/homelab_finder.sh)
 2.  Rendez-le exécutable : `chmod +x ~/homelab/homelab_finder.sh`
 3.  Exécutez : `~/homelab/homelab_finder.sh`
 

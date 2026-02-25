@@ -18,16 +18,16 @@ Le serveur (un vieux PC avec l'écran presque mort) tourne sur Proxmox, mais il 
 ## 🧱 Ingénierie de la Connexion (@.ssh/config)
 Pour simplifier l’accès à travers cette jungle réseau, un `.ssh/config` propre a été construit (vérifié via `kpihx-labs-ui`) :
 - **Host `homelab` :** Atteint Proxmox directement (`homelab.local`, User `ivann`, Port `2222`).
-- **Host `docker-host` :** Passe automatiquement par Proxmox via `ProxyJump` pour atteindre le conteneur LXC (IP `10.10.10.10`) avec `ForwardAgent yes`. (Voir [Tuto 2 : Mise sur pied du Docker-Host et Routage Intelligent](tutos_live/2-mise-en-place-docker-host.md))
+- **Host `docker-host` :** Passe automatiquement par Proxmox via `ProxyJump` pour atteindre le conteneur interne (`10.10.10.10`) avec `ForwardAgent yes`. (Voir [Tuto 2 : Mise sur pied du Docker-Host et Routage Intelligent](tutos_live/2-mise-en-place-docker-host.md))
 - **Sur PC :** Utilisation d'**Avahi** (mDNS) pour résoudre `homelab.local` malgré les changements d’IP.
 - **Sur Android (Le Hack) :** Impossible d’utiliser mDNS sans être root. Un script **Termux** a donc été écrit. (Voir [Annexe 2 : Termux SSH Homelab Toolkit](tutos_live/annexes/2-termux-ssh-toolkit.md))
 
 ## 🔧 Stabiliser l’instable : Le Network Watchdog
-La connectivité réseau sautait au moindre mouvement du câble. Parfois seul le LXC tombait, parfois tout Proxmox. Toutes les manipulations manuelles ont été automatisées. (Voir [Annexe 1 : Network Watchdog (Auto-Réparation)](tutos_live/annexes/1-network-watchdog-v3.md))
+La connectivité réseau sautait au moindre mouvement du câble. Parfois seul le LXC tombait, parfois tout Proxmox. Toutes les manipulations manuelles ont été automatisées. (Voir [Annexe 1 : Network Watchdog (Auto-Réparation & Monitoring)](tutos_live/annexes/1-network-watchdog-v3.md))
 
 C’est ainsi qu’est né le **network watchdog**.
 - Il teste régulièrement la connectivité (ping vers 8.8.8.8).
-- Il applique des réparations graduelles selon la gravité de la panne.
+- Il applique des réparations graduelles selon la gravité de la panne (Cycle interfaces -> DHCP -> WPA Reset -> Networking Restart).
 - Il logue tout dans `/var/log/network_watchdog.log`.
 - Il envoie un message Telegram dès qu’il intervient.
 Depuis la version 3, il n'y a plus jamais eu besoin de réparer la connectivité manuellement. Le système s'auto-guérit.
@@ -38,11 +38,11 @@ Une fois la stabilité réseau assurée, une stratégie sérieuse a été mise e
 1.  **La règle 3‑2‑1 (Sauvegardes) :** (Voir [Sécurité 1 : Stratégie de Sauvegarde et Maintenance (3-2-1)](tutos_live/security/1-sauvegarde-maintenance-321.md))
     - Une copie locale sur Proxmox.
     - Une copie sur un SSD externe (via exfiltration automatisée sur PC Ubuntu).
-    - Une copie miroir sur Google Drive via GVFS.
+    - Une copie miroir sur Google Drive via GVFS (ou `rclone`).
     - Exécution automatique tous les jours à **3h du matin**.
 2.  **Maintenance du Samedi (4h du matin) :**
     - Script de maintenance hebdomadaire (`weekly_maintenance.sh`) lancé juste après les sauvegardes.
-    - Nettoie intelligemment le système, évite les reboot naïfs, et garde le serveur fluide (`apt dist-upgrade`, `docker system prune -a`).
+    - Nettoie intelligemment le système, évite les reboot naïfs (qui sur Linux peuvent empirer les choses), et garde le serveur fluide (`apt dist-upgrade`, `docker system prune -a`).
 3.  **Purge Docker (5h du matin) :**
     - Conteneur dédié (ou script) pour le nettoyage des images, volumes orphelins et caches, exécuté vers 5h.
 4.  **Mises à jour Auto (Watchtower) :** (Voir [Sécurité 2 : Mises à jour Automatiques avec Watchtower](tutos_live/security/2-automatisation-watchtower.md))
@@ -105,7 +105,6 @@ L'infrastructure est aujourd'hui :
 - et entièrement déployée via usine logicielle.
 
 Une architecture cohérente, modulaire, élégante, et surtout vivante.
-
 
 ---
 ## 🗺️ Navigation

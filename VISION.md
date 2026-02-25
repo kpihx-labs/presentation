@@ -10,19 +10,77 @@ J’ai fini par comprendre que je vivais sur une île, celle du local. Et que si
 
 C’est comme ça que tout a commencé.
 
+---
+
+## 🏗️ Premiers fondements : un homelab sur un terrain instable
+
+Le serveur tournait sur Proxmox, mais il vivait sur eduroam, un réseau universitaire imprévisible. L’IP changeait sans prévenir, les restrictions réseau étaient nombreuses, et la moindre variation du DHCP pouvait casser l’accès. J’ai donc commencé par sécuriser l’accès SSH : port 2222 pour réduire le bruit des bots, authentification par clé uniquement, désactivation du login root, création de l’utilisateur ivann avec sudo, et ajout des clés publiques de mes appareils dans les authorized_keys.
+
+Pour simplifier l’accès, j’ai construit un `.ssh/config` propre : un Host `homelab` pour atteindre Proxmox directement, et un Host `docker-host` qui passe automatiquement par Proxmox via `ProxyJump`. Sur PC, Avahi m’a permis d’utiliser `homelab.local` malgré les changements d’IP. Sur Android, impossible d’utiliser mDNS sans root, alors j’ai écrit un script Termux qui scanne les IP autour de l’ancienne, détecte la nouvelle grâce à la hostkey SSH, et met automatiquement à jour mon `.ssh/config`.
+
+---
+
+## 🔧 Stabiliser l’instable : création du watchdog réseau
+
+Très vite, un autre problème est apparu : la connectivité réseau sautait au moindre mouvement du câble. Parfois seul le LXC tombait, parfois tout Proxmox. J’ai fini par automatiser toutes les manipulations que je faisais à la main : ifdown/ifup, relancer wpa_supplicant, renouveler le DHCP, redémarrer le service réseau…
+
+C’est ainsi qu’est né mon network watchdog. Il teste régulièrement la connectivité, applique des réparations graduelles, logue tout dans `/var/...`, et m’envoie un message Telegram dès qu’il intervient. Depuis la version 3, je n’ai plus jamais eu à réparer la connectivité manuellement.
+
+---
+
+## 💾 Hygiène du système : sauvegardes, maintenance, Docker
+
+Une fois la stabilité réseau assurée, j’ai mis en place une stratégie de sauvegarde sérieuse : la règle 3‑2‑1. Une copie locale sur Proxmox, une sur un SSD externe, et une sur Google Drive, tous les jours à 3h du matin.
+
+Ensuite, j’ai créé un script de maintenance hebdomadaire, lancé le samedi à 4h, juste après les sauvegardes. Ce script nettoie intelligemment le système, évite les reboot naïfs (qui sur Linux peuvent empirer les choses), et garde le serveur fluide. Pour Docker, j’ai ajouté un conteneur dédié au nettoyage des images, volumes et caches, exécuté vers 5h.
+
+---
+
+## 📊 Sentinel : donner des yeux au serveur
+
+Pour surveiller l’état du serveur, j’ai développé Sentinel, une sorte de task manager graphique maison. Il suit l’usage CPU, RAM, disque, charge, et m’envoie des alertes Telegram en cas de surcharge. Sentinel est devenu mon tableau de bord, intégré dans mon réseau Traefik.
+
+---
+
+## 🛠️ Industrialisation : GitLab CI/CD + GitHub
+
+Avant même de m’attaquer à Tailscale ou Cloudflare, j’ai voulu industrialiser mes déploiements. Coder directement sur le serveur via VSCode SSH surchargeait inutilement la machine.
+
+J’ai donc créé une organisation GitHub et un groupe GitLab, configuré des clés SSH distinctes, généré un token GitLab, et installé un GitLab Runner local sur Docker-host. J’ai défini des variables secrètes globales, structuré mes projets avec des templates Docker, docker-compose, gitignore, dockerignore, et parfois un Makefile. Chaque pipeline GitLab comporte au moins deux jobs : un pour déployer sur mon homelab, et un autre pour synchroniser automatiquement le dépôt vers GitHub.
+
+---
+
+## 🌐 Simplifier l’accès interne : Tailscale et le réseau privé overlay
+
+Avant Tailscale, j’utilisais des tunnels SSH (LocalForward) pour accéder à Proxmox, Portainer, Traefik, Adminer… C’était fonctionnel mais lourd.
+
+J’ai donc installé Tailscale dans Docker-host, dans le même réseau que Traefik. J’ai configuré un DNS local via AdGuard, avec une wildcard `*.homelab` pointant vers l’IP Tailscale du serveur. J’ai mis en place du split DNS dans Tailscale pour que tout ce qui concerne homelab passe par mon DNS interne. Pour éviter les boucles VPN, j’ai déclaré le sous-réseau 10.10.10.0/24 à Tailscale. Enfin, j’ai configuré Tailscale pour rediriger les ports 80 et 443 vers Traefik.
+
+À partir de là, accéder à mes services internes devenait trivial : `sentinel.homelab`, `portainer.homelab`, `traefik.homelab`… sans port, sans tunnel, depuis n’importe quel réseau.
+
+---
+
+## ☁️ Exposition publique : Cloudflare Tunnel et domaine kpihx-labs.com
+
+Pour exposer certains services au public, j’ai d’abord envisagé Tailscale Funnel, mais c’était trop lourd : un port par service, modifications du docker-compose, URLs non intuitives. J’ai donc opté pour Cloudflare. J’ai acheté le domaine `kpihx-labs.com`, déployé un conteneur Cloudflare Tunnel dans Docker-host, et configuré Zero Trust pour gérer les DNS publics.
+
+Cloudflare gère les certificats publics, Traefik gère les certificats internes, et tout passe proprement par le tunnel. J’ai testé l’accès on-host (authentification par email), puis j’ai mis en place OAuth Google pour un service de test : `whoami.kpihx-labs.com`. Google me renvoie un token contenant l’email, Cloudflare vérifie l’autorisation, et Traefik route vers le conteneur whoami. Le même service existe en local (`whoami.homelab`) pour tester la cohérence interne/externe.
+
+Ce test OAuth a été la validation finale : toute la chaîne — local, proxy, DNS interne, DNS public, tunnel, certificats, authentification — fonctionnait parfaitement.
+
+---
+
 ## 🌱 Quand la technique ne suffisait plus : naissance de la dimension humaine
 
 À mesure que mon homelab prenait forme, quelque chose d’autre a commencé à émerger en moi. Au départ, tout était guidé par la curiosité brute, le besoin presque vital de comprendre ce qui m’avait toujours échappé : le réseau, le cloud, le déploiement. Mais plus j’avançais, plus je réalisais que ce voyage n’était pas seulement un défi intellectuel. Il y avait une autre force, plus profonde, qui se réveillait.
 
-Je ressentais le besoin de partager.
-
-Pas partager au sens “publier un tuto”, mais partager vivant, partager transparent, partager comme on raconte une aventure, avec les erreurs, les hésitations, les pivots, les moments de doute et les moments de victoire. Je voulais que quelqu’un d’autre puisse revivre ce chemin, pas seulement le résultat final. Je voulais que ce que j’apprenais ne reste pas enfermé dans ma tête ou dans mon serveur, mais devienne une matière transmissible, une histoire technique mais humaine.
+Je ressentais le besoin de partager. Pas partager au sens “publier un tuto”, mais partager vivant, partager transparent, partager comme on raconte une aventure, avec les erreurs, les hésitations, les pivots, les moments de doute et les moments de victoire. Je voulais que quelqu’un d’autre puisse revivre ce chemin, pas seulement le résultat final. Je voulais que ce que j’apprenais ne reste pas enfermé dans ma tête ou dans mon serveur, mais devienne une matière transmissible, une histoire technique mais humaine.
 
 C’est là que l’idée de kpihx‑labs a commencé à prendre forme.
 
 ## 📘 kpihx‑labs : une plateforme née d’un besoin de transmettre
 
-La première vision qui s’est imposée, naturellement, c’était la **Vision 0 : une documentation vivante**, narrative, transparente, qui raconte le processus avant de montrer la solution. Une documentation qui ne cache rien, qui montre les problèmes avant les réponses, les pourquoi avant les comment. Une documentation qui donne envie de refaire le chemin, pas juste de copier-coller des commandes.
+La première vision qui s’est imposée, naturellement, cétait la **Vision 0 : une documentation vivante**, narrative, transparente, qui raconte le processus avant de montrer la solution. Une documentation qui ne cache rien, qui montre les problèmes avant les réponses, les pourquoi avant les comment. Une documentation qui donne envie de refaire le chemin, pas juste de copier-coller des commandes.
 
 Puis, en prolongeant cette logique, la **Vision 1** s’est dessinée : si j’ai réussi à industrialiser mes déploiements, pourquoi ne pas offrir à d’autres un moyen simple, propre, transparent de déployer leurs propres services ? (Voir [Tuto 3 : Industrialisation, Sécurité et DevOps](tutos_live/3-industrialisation-devops.md)). Un PaaS artisanal mais robuste, où l’utilisateur n’a pas besoin de comprendre Docker, Traefik ou GitLab CI pour déployer quelque chose. Une plateforme où la complexité est assumée, mais encapsulée.
 
@@ -87,7 +145,7 @@ De ces trois visions méta naissent deux grands axes pragmatiques :
 - **L’équipe :** un groupe de passionnés qui rejoindront l’aventure une fois la Vision 1 stabilisée.
 - **Le reste du monde :** partage vivant via LinkedIn, Medium, X, YouTube, vidéos, récits, tutoriels narratifs, ouverture progressive de la plateforme.
 
-Tout cela se fera progressivement, naturellement, sans précipitation, mas avec une direction claire dès que l’équipe sera formée.
+Tout cela se fera progressivement, naturellement, sans précipitation, mais avec une direction claire dès que l’équipe sera formée.
 
 ## 🎯 État actuel : un projet qui a trouvé son identité
 

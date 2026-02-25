@@ -8,8 +8,8 @@
 
 ## [Décembre 2025] : Stabilisation & Hardware
 - Montage du SSD 1 To.
-- Développement du **Network Watchdog V3**. (Voir [Annexe 1 : Network Watchdog (Auto-Réparation)](tutos_live/annexes/1-network-watchdog-v3.md))
-- Configuration du Masquerading (NAT) sur `vmbr1` pour l'isolation des LXC. (Voir [Tuto 1 : Déploiement Proxmox sur Réseau Sécurisé (802.1X Filaire)](tutos_live/1-deploiement-proxmox-8021x.md))
+- Développement du **Network Watchdog V3**. (Voir [Annexe 1 : Network Watchdog (Auto-Réparation & Monitoring)](tutos_live/annexes/1-network-watchdog-v3.md))
+- Configuration du Masquerading (NAT) sur `vmbr1` for l'isolation des LXC. (Voir [Tuto 1 : Déploiement Proxmox sur Réseau Sécurisé (802.1X Filaire)](tutos_live/1-deploiement-proxmox-8021x.md))
 - Mise en place de la règle de sauvegarde 3-2-1 (Local, SSD, Cloud). (Voir [Sécurité 1 : Stratégie de Sauvegarde et Maintenance (3-2-1)](tutos_live/security/1-sauvegarde-maintenance-321.md))
 
 ## [Décembre 2025] : Le Réseau Invisible
@@ -31,7 +31,6 @@
 - Structuration de la "Boîte Noire" documentaire dans `presentation/` avec un mandat strict de **100% transparence et exhaustivité**.
 - Rédaction de tutoriels "Live" axés "Problème ➔ Solution" dans le sous-dossier `tutos_live/`.
 - Externalisation et standardisation de toutes les configurations (Docker Compose, Scripts, SSH) dans `tutos_live/templates/` avec documentation approfondie en anglais.
-
 
 ---
 ## 🗺️ Navigation
