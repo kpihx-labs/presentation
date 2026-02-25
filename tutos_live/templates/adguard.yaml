@@ -1,0 +1,56 @@
+# AdGuard Home DNS Resolver
+# File: adguard.yaml
+# Description: Local DNS server for .homelab domain resolution and ad blocking.
+
+services:
+  adguard:
+    image: adguard/adguardhome:latest
+    container_name: adguard
+    restart: unless-stopped
+    
+    # --- NETWORK ---
+    # Connected to 'proxy' network to allow Traefik to route to the admin interface
+    networks:
+      - proxy
+    
+    # --- PORTS ---
+    # DNS must be exposed directly (TCP/UDP)
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      # IMPORTANT: Initial setup port (3000). Once set up behind Traefik, this can be commented out for security.
+      # - "3000:3000/tcp"
+
+    environment:
+      # Proxy for downloading blocklists if behind a restrictive firewall (e.g., Eduroam)
+      - http_proxy=http://129.104.201.11:8080
+      - https_proxy=http://129.104.201.11:8080
+      - no_proxy=localhost,127.0.0.1,10.10.10.0/24
+    
+    # --- PERSISTENCE ---
+    # Vital to avoid losing DNS rules (DNS Rewrites) upon container reboot
+    volumes:
+      - ./work:/opt/adguardhome/work
+      - ./conf:/opt/adguardhome/conf
+    
+    # --- TRAEFIK INTEGRATION (ADMIN ACCESS) ---
+    labels:
+      - "traefik.enable=true"
+      
+      # 1. Admin URL Definition
+      - "traefik.http.routers.adguard.rule=Host(`dns.homelab`)"
+      
+      # 2. Strict HTTPS Security
+      - "traefik.http.routers.adguard.entrypoints=websecure"
+      - "traefik.http.routers.adguard.tls=true"
+      
+      # 3. Double Authentication (Traefik Auth + AdGuard Auth)
+      - "traefik.http.routers.adguard.middlewares=auth"
+      
+      # 4. Service Binding
+      # Tells Traefik to hit port 3000 (AdGuard Admin) instead of port 80 (AdGuard Blocking Page)
+      - "traefik.http.services.adguard.loadbalancer.server.port=3000"
+
+networks:
+  proxy:
+    external: true

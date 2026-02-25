@@ -1,0 +1,29 @@
+# GitLab CI Deploy Only (Minimal)
+# File: gitlab-ci-deploy.yaml
+# Description: Minimal pipeline to deploy Docker Compose stacks on your homelab runner.
+
+stages:
+  - deploy
+
+deploy_homelab:
+  stage: deploy
+  tags:
+    - homelab # Targets your local GitLab Runner
+  only:
+    - main
+  script:
+    - echo "🚀 Deploying to KpihX Labs..."
+    
+    # 1. Dynamically recreate the .env file from GitLab CI/CD Secrets
+    # Note: Double the '>>' to append or use '>' to overwrite.
+    - echo "TELEGRAM_TOKEN=$TELEGRAM_TOKEN" >> .env
+    - echo "CHAT_ID=$CHAT_ID" >> .env
+    
+    # 2. Deploy the stack
+    # The runner executes this directly on your server using the local docker engine.
+    - docker compose up -d --build --remove-orphans
+    
+    # 3. System hygiene: Remove dangling images to save disk space
+    - docker image prune -f
+    
+    - echo "✅ Deployment successful."

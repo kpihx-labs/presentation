@@ -1,0 +1,60 @@
+# Homelab SSH Configuration Template
+# Place this in ~/.ssh/config on your local machine
+# Replace "ivann" with your local username and "homelab.local" with your server's mDNS address.
+
+# --- GLOBAL SETTINGS ---
+Host *
+    # Keeps the connection alive by sending a packet every 60 seconds
+    ServerAliveInterval 60
+    ServerAliveCountMax 5
+    # Use your modern ED25519 key for all connections
+    IdentityFile ~/.ssh/id_ed25519
+    # Forward your local SSH keys to remote hosts (vital for GitLab CI/CD)
+    ForwardAgent yes
+
+# --- 1. PHYSICAL BASTION (PROXMOX HOST) ---
+# Direct access to the server using mDNS (.local)
+Host homelab
+    HostName homelab.local
+    User ivann
+    Port 2222
+
+# --- 2. THE FACTORY (DOCKER-HOST LXC) ---
+# Reaches the internal container via the Proxmox bastion
+Host docker-host
+    HostName 10.10.10.10
+    User root
+    # This magic line allows you to jump through 'homelab' to reach 10.10.10.10
+    ProxyJump homelab
+    ForwardAgent yes
+
+# --- 3. VPN ACCESS (TAILSCALE) ---
+# Access your lab from anywhere in the world (4G, Public Wifi)
+Host kpihx-labs
+    HostName kpihx-labs
+    User ivann
+    Port 2222
+
+# --- 4. SECURE WEB TUNNELS (ADMIN INTERFACES) ---
+# Usage: ssh -N homelab-ui
+# The -N flag tells SSH not to open a shell, just to maintain the tunnels.
+Host homelab-ui
+    HostName homelab.local
+    User ivann
+    Port 2222
+    # Forward Proxmox GUI (Local 8006 -> Remote 8006)
+    LocalForward 8006 localhost:8006
+    # Forward Portainer GUI (Local 9443 -> LXC 9443)
+    LocalForward 9443 10.10.10.10:9443
+    # Forward Traefik Dashboard (Local 8080 -> LXC 8080)
+    LocalForward 8080 10.10.10.10:8080
+    # Forward Global HTTPS (Local 8443 -> LXC 443)
+    LocalForward 8443 10.10.10.10:443
+
+# --- 5. MOBILE SYNC (TERMUX) ---
+# Configuration for Android remote management
+Host kpihx-tel
+    HostName kpihx-phone # Replace with your phone's Tailscale IP
+    Port 8022
+    User u0_a417
+    IdentityFile ~/.ssh/id_ed25519_tel

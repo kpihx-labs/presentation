@@ -1,0 +1,28 @@
+# Tailscale VPN Mesh Node
+# File: tailscale.yaml
+# Description: Private overlay network access with Subnet Routing capabilities.
+
+services:
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: tailscale
+    restart: unless-stopped
+    networks:
+      - proxy
+    environment:
+      # Inject auth key from env (pre-authenticated)
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_HOSTNAME=kpihx-services
+      - TS_STATE_DIR=/var/lib/tailscale
+      # Mode: Userspace (better for Docker/LXC without kernel NET_ADMIN)
+      - TS_USERSPACE=true
+      # Prevent infinite loops on DNS requests
+      - TS_ACCEPT_DNS=false
+      # Optionally announce routes to your Docker subnet
+      # - TS_ROUTES=10.10.10.0/24
+    volumes:
+      - ./tailscale-data:/var/lib/tailscale
+
+networks:
+  proxy:
+    external: true

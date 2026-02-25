@@ -1,0 +1,44 @@
+# Traefik Edge Router Stack
+# File: traefik.yaml
+# Description: Global entry point for HTTP/HTTPS traffic with automatic redirection and dashboard.
+
+services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy
+    ports:
+      - "80:80"     # Standard HTTP (Redirected to 443)
+      - "443:443"   # Secure HTTPS
+      - "8080:8080" # Local dashboard
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro # Mandatory to listen to docker events
+    command:
+      - "--api.insecure=false" 
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.websecure.address=:443"
+    labels:
+      - "traefik.enable=true"
+      # Secure the Dashboard with Basic Auth (Generate hash with: htpasswd -nb user password)
+      # Remember to double the dollar signs: $$apr1$$...
+      - "traefik.http.middlewares.auth.basicauth.users=admin:$$apr1$$YOUR_HASH_HERE"
+      
+      - "traefik.http.routers.api.rule=Host(`traefik.homelab`)"
+      - "traefik.http.routers.api.service=api@internal"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.tls=true" 
+      - "traefik.http.routers.api.middlewares=auth"
+
+networks:
+  proxy:
+    external: true

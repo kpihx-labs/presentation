@@ -1,0 +1,29 @@
+# Ollama AI Inference Engine
+# File: ollama.yaml
+# Description: Local LLM runner with memory limits and secured port exposure.
+
+services:
+  brain:
+    image: ollama/ollama:latest
+    container_name: imhotep-brain
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      # SECURE: Only allows connections from localhost (use SSH Tunnels for remote access)
+      - "127.0.0.1:11434:11434"
+    volumes:
+      # Persistent storage for downloaded LLM models (llama3, qwen, etc.)
+      - ollama_storage:/root/.ollama
+    deploy:
+      resources:
+        limits:
+          # Protect the system from OOM (Out Of Memory) crashes
+          memory: 8G
+
+volumes:
+  ollama_storage:
+
+networks:
+  proxy:
+    external: true

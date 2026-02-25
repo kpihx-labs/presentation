@@ -1,0 +1,43 @@
+# PostgreSQL and Adminer Stack
+# File: postgres_adminer.yaml
+# Description: Database core for Django/Python applications with a web UI management tool.
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      # These variables should be defined in Portainer Stack env settings
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-app_db}
+    networks:
+      - proxy
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    labels:
+      # Critical: Do not allow automatic updates of the database to prevent data corruption
+      - "com.centurylinklabs.watchtower.enable=false"
+
+  adminer:
+    image: adminer:4-standalone
+    container_name: adminer
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      # Accessible via db.homelab (Internal DNS)
+      - "traefik.http.routers.adminer.rule=Host(`db.homelab`)"
+      - "traefik.http.routers.adminer.entrypoints=web,websecure"
+      - "traefik.http.routers.adminer.tls=true"
+      # Protected by Traefik Basic Auth middleware
+      - "traefik.http.routers.adminer.middlewares=auth"
+
+volumes:
+  pg_data:
+
+networks:
+  proxy:
+    external: true

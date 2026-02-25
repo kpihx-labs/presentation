@@ -1,0 +1,19 @@
+# Cloudflare Tunnel Ingress
+# File: cloudflared.yaml
+# Description: Secure public exposure without opening local ports.
+
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      # Inject the token from Portainer stack environment variables
+      - TUNNEL_TOKEN=${CF_TUNNEL_TOKEN}
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

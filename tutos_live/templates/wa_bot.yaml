@@ -1,0 +1,23 @@
+# WA-Bot (WhatsApp Baileys Bot)
+# File: wa_bot.yaml
+# Description: Node.js WhatsApp bot with persistent session storage.
+
+services:
+  wa-bot:
+    build: .
+    container_name: wa-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - proxy
+    volumes:
+      # Persistent storage for WhatsApp Web authentication session
+      - wa_session:/app/session
+
+volumes:
+  wa_session:
+
+networks:
+  proxy:
+    external: true
