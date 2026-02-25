@@ -33,6 +33,12 @@ Chaque fichier dans `tutos_live/` doit respecter ce format unifié :
 - **Transparence des Liens :** Dans les fichiers de synthèse (`VISION`, `STATE_OF_THE_ART`, `EVOLUTION`), les liens vers les tutoriels ne doivent jamais être génériques (ex: "Tuto 1"). Ils doivent impérativement utiliser le titre complet et riche du fichier cible pour une clarté maximale.
 - **CI/CD Deployment :** Le push vers GitLab déclenche un pipeline qui synchronise la branche `gh-pages` de GitHub. Les scripts de production sont liés directement au dépôt `scripts` de l'organisation GitHub pour éviter les duplications.
 - **Évolution Continue :** Si un nouveau service est déployé, il doit faire l'objet d'un nouveau fichier dans `tutos_live/` suivant ce même standard, et ses configurations doivent enrichir `templates/`.
+- **Reproductibilité & Scripts de Validation :** Pour toute tâche impliquant une commande complexe (ex: vérifier les références des templates) ou une série de commandes Bash/Python (plus de 5 lignes), **ne pas exécuter de boucles dans le terminal**. Il faut :
+    1. Créer le dossier `scripts/` s'il n'existe pas.
+    2. Y placer un script dédié (`.sh` ou `.py`).
+    3. **Full Verbose :** Tous les scripts créés doivent être **full verbose** par défaut. Ils doivent imprimer chaque étape franchie, les fichiers scannés, et le détail des succès/échecs pour une transparence totale.
+    4. Exécuter ce script.
+    5. Ces scripts font office de tests. **Avant chaque commit majeur, il faut impérativement relancer ces scripts de validation** pour s'assurer que l'intégrité de la documentation n'est pas compromise (liens brisés, templates non référencés, tutos orphelins).
 ---
 ## 🗺️ Navigation
 - [🏠 Accueil](https://kpihx-labs.github.io/presentation/#/README.md)
