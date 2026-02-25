@@ -3,9 +3,29 @@
 **Contexte :** Vous avez des services qui tournent (Sentinel, Adminer), mais pour y accéder, vous devez soit faire des tunnels SSH compliqués, soit être physiquement à l'X. Nous voulons un accès "Transparent" : taper `sentinel.homelab` dans le navigateur de votre téléphone, n'importe où dans le monde, et que ça fonctionne.
 
 **Objectifs :**
-1. Créer un annuaire DNS privé (**AdGuard Home**) pour gérer les domaines `.homelab`.
-2. Monter un tunnel VPN sécurisé (**Tailscale**) qui traverse tous les firewalls.
-3. Configurer le **Split DNS** pour ne pas ralentir votre connexion internet classique.
+1. Installer **Tailscale** sur l'hôte physique (PVE) pour le routage et la stabilité.
+2. Créer un annuaire DNS privé (**AdGuard Home**) dans Docker pour gérer les domaines `.homelab`.
+3. Monter un tunnel VPN sécurisé (**Tailscale Container**) pour isoler les services.
+4. Configurer le **Split DNS** pour ne pas ralentir votre connexion internet classique.
+
+---
+
+## 🏗️ PHASE 0 : INSTALLATION SUR L'HÔTE (PROXMOX PVE)
+
+### 🤔 Pourquoi faire cela ?
+Avant de mettre Tailscale dans Docker, il est vital de l'avoir sur l'hôte physique. 
+*   **Stabilité :** Si Docker crash, vous gardez l'accès SSH à votre serveur via le VPN.
+*   **Gateway :** C'est l'hôte qui servira de "Subnet Router" pour exposer tout votre réseau local (10.10.10.0/24) au reste du VPN.
+
+### ✅ La Solution
+Connectez-vous en SSH à votre **PVE** et lancez l'installation classique :
+```bash
+curl -fsSL https://tailscale.com/install.sh | sh
+```
+Activez Tailscale en annonçant votre réseau interne :
+```bash
+sudo tailscale up --advertise-routes=10.10.10.0/24
+```
 
 ---
 
@@ -18,9 +38,40 @@ Dans le conteneur Docker, le résolveur principal est **Tailscale** (présent au
 Pour ce qui revient au serveur (`.homelab`), c'est le conteneur **AdGuard** (notre DNS local) qui prend le relais. Il gère aussi l'**Upstream DNS**. Résultat : Le jour où le serveur quitte l'X pour une box internet standard, la seule chose à modifier, ce sont les IP des serveurs Upstream DNS dans AdGuard et le Nameserver Global de Tailscale. Le conteneur Docker, lui, n'a jamais su qu'il était à l'X.
 
 **✅ La Solution :**
-1. **Déploiement :** Récupérez le **Template :** [adguard.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/adguard.yaml) et déployez-le via Portainer.
-2. **DNS Rewrite :** Dans l'interface AdGuard (port 3000), allez dans *Filtres > Réécritures DNS*. Ajoutez une règle : `*.homelab` ➔ IP Tailscale de votre serveur.
-3. **Upstream DNS (Le Pivot) :** Configurez AdGuard pour qu'il demande aux serveurs de l'école (`129.104.30.41`) quand il ne connaît pas une adresse.
+
+1. **Préparation des dossiers (Sur le serveur)**
+Connectez-vous en SSH à votre conteneur `docker-host` :
+```bash
+ssh docker-host
+mkdir -p /root/dns/work
+mkdir -p /root/dns/conf
+cd /root/dns
+```
+
+2. **Déploiement :** Récupérez le **Template :** [adguard.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/adguard.yaml) et déployez-le via Portainer.
+
+3. **Configuration Initiale (Via Tunnel SSH)**
+Pour configurer AdGuard la première fois, on ne peut pas utiliser de nom de domaine. On doit y accéder via un tunnel.
+*Sur votre PC :*
+```bash
+ssh -L 3000:10.10.10.10:3000 homelab
+```
+*Dans votre navigateur :*
+Ouvrez `http://localhost:3000`.
+*   **Interface Admin :** Choisissez le port **3000** (Important, sinon conflit avec Traefik).
+*   **Serveur DNS :** Laissez le port **53**.
+
+4. **Configuration des "Upstream DNS" (Pour avoir Internet)**
+AdGuard doit savoir à qui demander quand il ne connaît pas la réponse (ex: google.com). À l'X, on ne peut pas sortir sur le port 53 vers Google (8.8.8.8). On doit utiliser les DNS de l'école.
+*   Dans AdGuard > **Paramètres** > **Paramètres DNS**.
+*   Section **Serveurs DNS amont** : Supprimez tout et mettez les IP de l'X (trouvées dans `/etc/resolv.conf` sur le serveur) :
+    `129.104.30.41`
+    `129.104.32.41`
+
+5. **La Règle Magique : DNS Rewrite**
+C'est ici qu'on crée le domaine `.homelab`.
+*   Dans AdGuard > **Filtres** > **Réécritures DNS**.
+*   Ajoutez une règle : `*.homelab` ➔ **IP Tailscale de votre serveur**.
 
 ---
 
