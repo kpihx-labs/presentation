@@ -8,23 +8,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css" title="docsify-darklight-theme" type="text/css" />
   <style>
-    /* Correction de l'ordre : Nom au-dessus de la recherche */
-    .sidebar > h1 {
-      order: 1 !important;
-      margin-bottom: 0 !important;
+    /* --- VS CODE STYLE UI --- */
+    
+    /* Force Flexbox sur la sidebar pour gérer l'ordre */
+    .sidebar {
+      display: flex !important;
+      flex-direction: column !important;
+      background-color: var(--sidebar-background) !important;
     }
+
+    /* 1. Titre KpihX Labs tout en haut */
+    .app-name {
+      order: 1 !important;
+      margin-top: 20px !important;
+      font-weight: bold !important;
+      font-size: 1.5rem !important;
+    }
+
+    /* 2. Barre de recherche juste en dessous */
     .search {
       order: 2 !important;
+      margin-bottom: 20px !important;
     }
+
+    /* 3. Navigation en dernier */
     .sidebar-nav {
       order: 3 !important;
+      flex: 1 !important;
     }
-    /* Style de l'interrupteur de thème */
+
+    /* Ajustement de l'interrupteur de thème pour le style VS Code */
     #docsify-darklight-theme {
-      top: 10px !important;
-      right: 10px !important;
-      width: 30px !important;
-      height: 30px !important;
+      top: 15px !important;
+      right: 15px !important;
+      width: 28px !important;
+      height: 28px !important;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3) !important;
+    }
+
+    /* Style des inputs de recherche style VS Code */
+    .search input {
+      background-color: #3c3c3c !important;
+      border: 1px solid #555 !important;
+      color: #cccccc !important;
+      border-radius: 3px !important;
     }
   </style>
 </head>
@@ -37,9 +64,9 @@
       loadSidebar: true,
       subMaxLevel: 2,
       auto2top: true,
-      themeColor: '#3F51B5',
+      themeColor: '#007acc', // Bleu VS Code
       alias: {
-        '/.*/_sidebar.md': '/_sidebar.md' // BARRE LATÉRALE UNIQUE
+        '/.*/_sidebar.md': '/_sidebar.md'
       },
       search: {
         maxAge: 86400000,
@@ -49,18 +76,36 @@
         depth: 6
       },
       darklightTheme: {
-        siteFont : "PT Sans",
+        siteFont : "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
         defaultTheme : 'dark',
-        codeFontFamily : 'Roboto Mono, Monaco, courier, monospace',
-        bodyFontSize : '17px',
+        codeFontFamily : 'Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace',
+        bodyFontSize : '16px',
         dark: {
-          accent: '#3F51B5',
-          background: '#091a28',
+          accent: '#007acc',
+          background: '#1e1e1e',      // VS Code Main BG
+          sidebarBackground: '#252526', // VS Code Sidebar BG
+          textColor: '#d4d4d4',       // VS Code Light Gray Text
+          codeTextColor : '#dcdcaa',
+          codeBackgroundColor : '#1e1e1e',
+          borderColor : '#333333',
+          blockQuoteColor : '#6a9955',
+          highlightColor : '#264f78',
+          sidebarSubColor : '#cccccc',
+          codeTypeColor : '#4ec9b0',
           toogleImage : 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/sun.svg)'
         },
         light: {
-          accent: '#3F51B5',
+          accent: '#007acc',
           background: '#ffffff',
+          sidebarBackground: '#f3f3f3',
+          textColor: '#333333',
+          codeTextColor : '#000000',
+          codeBackgroundColor : '#f5f5f5',
+          borderColor : 'rgba(0,0,0,.07)',
+          blockQuoteColor : '#858585',
+          highlightColor : '#e7f3ff',
+          sidebarSubColor : '#666666',
+          codeTypeColor : '#007acc',
           toogleImage : 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/moon.svg)'
         }
       }
