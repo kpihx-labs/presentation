@@ -6,26 +6,28 @@ stages:
 
 github_pages:
   stage: deploy_pages
-  image: 
-    name: alpine/git:latest
-    entrypoint: [""]
+  # The tags ensures it runs on your local Docker-host runner
+  tags:
+    - homelab
   variables:
-    GITHUB_ORG: "KpihX-Lab"
+    GITHUB_ORG: "kpihx-labs"
     REPO_NAME: "presentation"
   only:
     - main
   script:
-    - "echo '🚀 Preparing GitHub Pages deployment...'"
+    - "echo '🚀 Preparing GitHub Pages deployment on local runner...'"
     
     # Configure local Git
     - "git config --global user.email 'ci@kpihx-labs.com'"
     - "git config --global user.name 'GitLab CI'"
     
-    # 1. Create gh-pages branch
+    # 1. Prepare gh-pages branch
+    - "git branch -D gh-pages || true"
     - "git checkout -b gh-pages"
     
     # 2. Fetch live scripts (using GITHUB_TOKEN for auth)
-    - "echo '📥 Fetching live scripts from GitHub...'"
+    - "echo '📥 Fetching live scripts from GitHub kpihx-labs/scripts...'"
+    - "rm -rf temp_scripts live_scripts"
     - "git clone https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_ORG}/scripts.git temp_scripts || echo '⚠️ Failed to clone scripts repo.'"
     - "mkdir -p live_scripts"
     - "cp temp_scripts/*.sh live_scripts/ 2>/dev/null || echo 'ℹ️ No .sh files found to import.'"
@@ -37,11 +39,12 @@ github_pages:
     
     # 4. Ensure GitHub repo exists and push
     - "echo '🔄 Syncing to GitHub...'"
-    - "apk add --no-cache curl"
+    - "sudo apt-get update -qq && sudo apt-get install -y -qq curl"
     - "curl -s -H \"Authorization: token ${GITHUB_TOKEN}\" -X POST -d \"{\\\"name\\\":\\\"${REPO_NAME}\\\", \\\"private\\\":false}\" https://api.github.com/orgs/${GITHUB_ORG}/repos || echo 'ℹ️ Repo might already exist.'"
     
     # Set remote and push both branches
-    - "git remote add github https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_ORG}/${REPO_NAME}.git || git remote set-url github https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_ORG}/${REPO_NAME}.git"
+    - "git remote remove github || true"
+    - "git remote add github https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_ORG}/${REPO_NAME}.git"
     
     - "echo '📤 Pushing to GitHub...'"
     - "git push github main:main --force"
