@@ -46,11 +46,11 @@
       box-shadow: 0 0 5px rgba(0,0,0,0.3) !important;
     }
 
-    /* Style des inputs de recherche style VS Code */
+    /* Style des inputs de recherche dynamique (Thème-aware) */
     .search input {
-      background-color: #3c3c3c !important;
-      border: 1px solid #555 !important;
-      color: #cccccc !important;
+      background-color: var(--codeBackgroundColor) !important;
+      border: 1px solid var(--borderColor) !important;
+      color: var(--textColor) !important;
       border-radius: 3px !important;
     }
   </style>
@@ -86,7 +86,7 @@
           sidebarBackground: '#252526', // VS Code Sidebar BG
           textColor: '#d4d4d4',       // VS Code Light Gray Text
           codeTextColor : '#dcdcaa',
-          codeBackgroundColor : '#1e1e1e',
+          codeBackgroundColor : '#3c3c3c', // Plus clair pour l'input en sombre
           borderColor : '#333333',
           blockQuoteColor : '#6a9955',
           highlightColor : '#264f78',
@@ -100,8 +100,8 @@
           sidebarBackground: '#f3f3f3',
           textColor: '#333333',
           codeTextColor : '#000000',
-          codeBackgroundColor : '#f5f5f5',
-          borderColor : 'rgba(0,0,0,.07)',
+          codeBackgroundColor : '#ffffff', // Fond blanc en clair
+          borderColor : 'rgba(0,0,0,.1)',
           blockQuoteColor : '#858585',
           highlightColor : '#e7f3ff',
           sidebarSubColor : '#666666',
