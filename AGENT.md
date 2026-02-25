@@ -33,10 +33,13 @@ Chaque fichier dans `tutos_live/` doit respecter ce format unifié :
 - **CI/CD Deployment :** Le push vers GitLab déclenche un pipeline qui synchronise la branche `gh-pages` de GitHub. Les scripts de production sont liés directement au dépôt `scripts` de l'organisation GitHub pour éviter les duplications.
 - **Évolution Continue :** Si un nouveau service est déployé, il doit faire l'objet d'un nouveau fichier dans `tutos_live/` suivant ce même standard, et ses configurations doivent enrichir `templates/`.
 
+
 ---
 ## 🗺️ Navigation
 - [🏠 Accueil](README.md)
 - [🔭 Vision](VISION.md)
 - [🏗️ État de l'Art](STATE_OF_THE_ART.md)
 - [🕒 Évolution](EVOLUTION.md)
+- [🚀 Live Tutorials](tutos_live/README.md)
+- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
 - [🤖 Agent Mandate](AGENT.md)

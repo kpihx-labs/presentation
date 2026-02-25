@@ -18,10 +18,13 @@ This directory contains the step-by-step implementation guides for KpihX Labs. T
 - [1. Network Watchdog (Auto-Réparation)](annexes/1-network-watchdog-v3.md)
 - [2. Termux SSH Homelab Toolkit](annexes/2-termux-ssh-toolkit.md)
 
+
 ---
 ## 🗺️ Navigation
 - [🏠 Accueil](../README.md)
 - [🔭 Vision](../VISION.md)
 - [🏗️ État de l'Art](../STATE_OF_THE_ART.md)
 - [🕒 Évolution](../EVOLUTION.md)
+- [🚀 Live Tutorials](README.md)
+- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
 - [🤖 Agent Mandate](../AGENT.md)

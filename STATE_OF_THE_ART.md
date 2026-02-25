@@ -106,9 +106,13 @@ L'infrastructure est aujourd'hui :
 
 Une architecture cohérente, modulaire, élégante, et surtout vivante.
 
+
 ---
 ## 🗺️ Navigation
 - [🏠 Accueil](README.md)
 - [🔭 Vision](VISION.md)
+- [🏗️ État de l'Art](STATE_OF_THE_ART.md)
 - [🕒 Évolution](EVOLUTION.md)
+- [🚀 Live Tutorials](tutos_live/README.md)
+- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
 - [🤖 Agent Mandate](AGENT.md)

@@ -45,5 +45,13 @@ To function, the GitLab pipelines require the following variables defined in the
 - [🚀 Live Tutorials](tutos_live/README.md) — Step-by-step implementation guides.
 - [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates) — Generic configuration files.
 
+
 ---
-*Built with ❤️ and persistence by KpihX.*
+## 🗺️ Navigation
+- [🏠 Accueil](README.md)
+- [🔭 Vision](VISION.md)
+- [🏗️ État de l'Art](STATE_OF_THE_ART.md)
+- [🕒 Évolution](EVOLUTION.md)
+- [🚀 Live Tutorials](tutos_live/README.md)
+- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
+- [🤖 Agent Mandate](AGENT.md)

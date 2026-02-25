@@ -32,10 +32,13 @@
 - Rédaction de tutoriels "Live" axés "Problème ➔ Solution" dans le sous-dossier `tutos_live/`.
 - Externalisation et standardisation de toutes les configurations (Docker Compose, Scripts, SSH) dans `tutos_live/templates/` avec documentation approfondie en anglais.
 
+
 ---
 ## 🗺️ Navigation
 - [🏠 Accueil](README.md)
 - [🔭 Vision](VISION.md)
 - [🏗️ État de l'Art](STATE_OF_THE_ART.md)
 - [🕒 Évolution](EVOLUTION.md)
+- [🚀 Live Tutorials](tutos_live/README.md)
+- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
 - [🤖 Agent Mandate](AGENT.md)
