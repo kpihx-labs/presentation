@@ -141,6 +141,28 @@ sudo tailscale up --accept-routes --accept-dns
 C'est propre, logique, et ça marche partout.
 
 ---
+
+## ⚠️ POST-MORTEM : L'Échec du "Double Tailscale" (Pourquoi nous avons changé de méthode)
+
+Dans notre approche initiale, nous avions déployé un conteneur Docker Tailscale (Voir l'archive : [tailscale.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/tailscale.yaml)) à l'intérieur du `docker-host` pour utiliser son MagicDNS, tout en gardant une installation Tailscale sur le PVE hôte.
+
+### 💥 Le problème rencontré : Le Cercle Vicieux du DNS
+Cette architecture a causé un effondrement fatal du DNS (`servefail`) sur le PVE après un redémarrage de Traefik :
+1.  Le PVE avait `accept-dns=true` et pointait vers `100.100.100.100`.
+2.  Le trafic TCP était lié à Traefik via `tailscale serve`.
+3.  Lorsque Traefik redémarrait, le réseau Docker coupait.
+4.  Les deux instances Tailscale (Hôte et Conteneur) se battaient pour les mêmes ports UDP de sortie.
+5.  **Résultat :** Le PVE perdait son DNS. Sans DNS, impossible de résoudre les registres Docker, empêchant les conteneurs de redémarrer. L'infrastructure était totalement bloquée.
+
+### 🛠️ La nouvelle philosophie (Subnet Routing)
+Nous avons abandonné le conteneur Docker. Le PVE (Hôte physique) est redevenu le seul chef d'orchestre :
+- Il fait du **Subnet Routing** (`--advertise-routes=10.10.10.0/24`) pour donner accès à tout le sous-réseau Docker sans avoir besoin d'être "dans" Docker.
+- Il a `accept-dns=false` pour utiliser exclusivement les serveurs DNS infaillibles de l'école (pas de boucle locale).
+- Le Split DNS d'AdGuard fonctionne de manière transparente pour le reste des appareils du mesh.
+
+**Leçon apprise :** L'abstraction est puissante, mais elle ne doit jamais créer de dépendances circulaires entre l'hôte et ses propres conteneurs.
+
+---
 ## 🗺️ Navigation
 - [🏠 Accueil](https://kpihx-labs.github.io/presentation/#/README.md)
 - [🔭 Vision](https://kpihx-labs.github.io/presentation/#/VISION.md)

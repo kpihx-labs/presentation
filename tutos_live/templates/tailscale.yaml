@@ -1,3 +1,7 @@
+# ⚠️ DÉPRÉCIÉ (DEPRECATED) : Cette méthode de conteneur crée des conflits DNS circulaires sur Proxmox.
+# Veuillez utiliser l'installation sur l'hôte physique (Subnet Routing) décrite dans le Tuto 4.
+# =================================================================================================
+
 # Tailscale VPN Mesh Node
 # File: tailscale.yaml
 # Description: Private overlay network access with Subnet Routing capabilities.
