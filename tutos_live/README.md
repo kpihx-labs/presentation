@@ -18,12 +18,3 @@ This directory contains the step-by-step implementation guides for KpihX Labs. T
 ### 🛠️ Annexes & Survival Tools
 - [1. Network Watchdog (Auto-Réparation)](https://kpihx-labs.github.io/presentation/#/tutos_live/annexes/1-network-watchdog-v3.md)
 - [2. Termux SSH Homelab Toolkit](https://kpihx-labs.github.io/presentation/#/tutos_live/annexes/2-termux-ssh-toolkit.md)
----
-## 🗺️ Navigation
-- [🏠 Accueil](https://kpihx-labs.github.io/presentation/#/README.md)
-- [🔭 Vision](https://kpihx-labs.github.io/presentation/#/VISION.md)
-- [🏗️ État de l'Art](https://kpihx-labs.github.io/presentation/#/STATE_OF_THE_ART.md)
-- [🕒 Évolution](https://kpihx-labs.github.io/presentation/#/EVOLUTION.md)
-- [🚀 Live Tutorials](https://kpihx-labs.github.io/presentation/#/tutos_live/README.md)
-- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
-- [🤖 Agent Mandate](https://kpihx-labs.github.io/presentation/#/AGENT.md)

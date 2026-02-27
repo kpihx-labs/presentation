@@ -134,12 +134,4 @@ Il faut dire à Traefik (sur ton serveur) d'accepter ce nouveau nom de domaine p
 
 Tu as maintenant une exposition publique de niveau entreprise, protégée par Google, sans aucun port ouvert chez toi. 🛡️✨⚓
 
----
-## 🗺️ Navigation
-- [🏠 Accueil](https://kpihx-labs.github.io/presentation/#/README.md)
-- [🔭 Vision](https://kpihx-labs.github.io/presentation/#/VISION.md)
-- [🏗️ État de l'Art](https://kpihx-labs.github.io/presentation/#/STATE_OF_THE_ART.md)
-- [🕒 Évolution](https://kpihx-labs.github.io/presentation/#/EVOLUTION.md)
-- [🚀 Live Tutorials](https://kpihx-labs.github.io/presentation/#/tutos_live/README.md)
-- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
-- [🤖 Agent Mandate](https://kpihx-labs.github.io/presentation/#/AGENT.md)
+

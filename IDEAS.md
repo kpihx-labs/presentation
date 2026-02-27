@@ -18,13 +18,4 @@ Ce document recense les axes d'évolution concrets pour transformer ce dépôt e
 - [ ] **Showcase Vidéo :** Intégrer des démos interactives ou des liens vers des explications narratives en vidéo.
 - [ ] **Graphique d'Architecture Dynamique :** Utiliser Mermaid.js ou un outil équivalent pour visualiser les flux réseau en temps réel.
 
----
-## 🗺️ Navigation
-- [🏠 Accueil](https://kpihx-labs.github.io/presentation/#/README.md)
-- [🔭 Vision](https://kpihx-labs.github.io/presentation/#/VISION.md)
-- [🏗️ État de l'Art](https://kpihx-labs.github.io/presentation/#/STATE_OF_THE_ART.md)
-- [🕒 Évolution](https://kpihx-labs.github.io/presentation/#/EVOLUTION.md)
-- [💡 Ideas](https://kpihx-labs.github.io/presentation/#/IDEAS.md)
-- [🚀 Live Tutorials](https://kpihx-labs.github.io/presentation/#/tutos_live/README.md)
-- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
-- [🤖 Agent Mandate](https://kpihx-labs.github.io/presentation/#/AGENT.md)
+

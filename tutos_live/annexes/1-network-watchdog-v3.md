@@ -91,12 +91,4 @@ Il est recommandé de tester le watchdog pour valider son bon fonctionnement :
 
 **Verdict :** Depuis la V3 de ce watchdog, le serveur a une disponibilité de 99.9% même sur un réseau instable. Il vous préviendra même sur Telegram si votre IP publique change ! 🛡️🛰️
 
----
-## 🗺️ Navigation
-- [🏠 Accueil](https://kpihx-labs.github.io/presentation/#/README.md)
-- [🔭 Vision](https://kpihx-labs.github.io/presentation/#/VISION.md)
-- [🏗️ État de l'Art](https://kpihx-labs.github.io/presentation/#/STATE_OF_THE_ART.md)
-- [🕒 Évolution](https://kpihx-labs.github.io/presentation/#/EVOLUTION.md)
-- [🚀 Live Tutorials](https://kpihx-labs.github.io/presentation/#/tutos_live/README.md)
-- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
-- [🤖 Agent Mandate](https://kpihx-labs.github.io/presentation/#/AGENT.md)
+

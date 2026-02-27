@@ -3,6 +3,8 @@
   - [🔭 Vision](/VISION.md)
   - [🏗️ État de l'Art](/STATE_OF_THE_ART.md)
   - [🕒 Évolution](/EVOLUTION.md)
+  - [🚜 Portabilité](/PORTABILITY.md)
+  - [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
   - [💡 Ideas](/IDEAS.md)
   - [🤖 Agent Mandate](/AGENT.md)
 
@@ -12,6 +14,7 @@
   - [3. Industrialisation CI/CD DevOps](/tutos_live/3-industrialisation-devops.md)
   - [4. Réseau Overlay Tailscale & DNS](/tutos_live/4-reseau-overlay-tailscale.md)
   - [5. Exposition Cloudflare Zero Trust](/tutos_live/5-exposition-publique-cloudflare.md)
+  - [6. Certification SSL DNS-01](/tutos_live/6-souverainete-secrets-certification-dns01.md)
 
 - **Sécurité**
   - [1. Stratégie Sauvegarde 3-2-1](/tutos_live/security/1-sauvegarde-maintenance-321.md)

@@ -100,12 +100,4 @@ Normalement, un terminal est lié à votre session SSH. Si la session coupe, le 
 
 **Verdict :** Ton infrastructure est maintenant protégée contre l'oubli humain. La forteresse se verrouille d'elle-même dès que tu tournes le dos. 🚀🛡️
 
----
-## 🗺️ Navigation
-- [🏠 Accueil](https://kpihx-labs.github.io/presentation/#/README.md)
-- [🔭 Vision](https://kpihx-labs.github.io/presentation/#/VISION.md)
-- [🏗️ État de l'Art](https://kpihx-labs.github.io/presentation/#/STATE_OF_THE_ART.md)
-- [🕒 Évolution](https://kpihx-labs.github.io/presentation/#/EVOLUTION.md)
-- [🚀 Live Tutorials](https://kpihx-labs.github.io/presentation/#/tutos_live/README.md)
-- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
-- [🤖 Agent Mandate](https://kpihx-labs.github.io/presentation/#/AGENT.md)
+

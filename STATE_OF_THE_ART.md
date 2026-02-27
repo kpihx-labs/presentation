@@ -97,6 +97,27 @@ Pour exposer certains services au public, Tailscale Funnel a d'abord été envis
 - Le même service existe en local (`whoami.homelab`) pour tester la cohérence interne/externe.
 - Ce test a validé toute la chaîne : local, proxy de l'X, DNS interne, DNS public, tunnel, certificats, authentification.
 
+## 🎯 Inventaire des Services (Février 2026)
+L'infrastructure héberge actuellement **14 services actifs**, répartis en deux piliers d'exposition :
+
+### 🌍 Pilier Public (Exposés via Cloudflare Tunnel)
+Accessibles via `https://service.kpihx-labs.com` avec protection **Google OAuth** :
+- **sentinel** : Monitoring CPU/RAM/Disque en temps réel.
+- **kpihx-portal** : Page d'accueil centralisée du lab.
+
+### 🔐 Pilier Privé (Accessibles via Tailscale uniquement)
+Accessibles via `https://service.kpihx-labs.com` (Souverain) ou `.homelab` (Local) :
+- **vaultwarden** : Coffre-fort de mots de passe (Certifié SSL Let's Encrypt Production).
+- **polytask** : Gestionnaire de tâches IA.
+- **whoami** : Service de test de headers et routage.
+- **adguard** : Serveur DNS récursif et filtrage (Cœur de l'abstraction).
+- **portainer** : Orchestration et gestion des stacks Docker.
+- **traefik** : Routeur Edge et automate ACME (DNS-01).
+- **imhotep-brain** : Instance **Ollama** locale pour l'IA générative souveraine.
+- **wa-bot** : Bot d'intégration WhatsApp pour les notifications système.
+- **postgres** & **adminer** : Base de données relationnelle et interface de gestion.
+- **watchtower** : Automatisation des mises à jour d'images Docker.
+
 ## 🎯 Architecture Actuelle
 L'infrastructure est aujourd'hui :
 - **auto‑réparatrice** (Watchdog)
@@ -108,12 +129,3 @@ L'infrastructure est aujourd'hui :
 - et entièrement déployée via usine logicielle.
 
 Une architecture cohérente, modulaire, élégante, et surtout vivante.
----
-## 🗺️ Navigation
-- [🏠 Accueil](https://kpihx-labs.github.io/presentation/#/README.md)
-- [🔭 Vision](https://kpihx-labs.github.io/presentation/#/VISION.md)
-- [🏗️ État de l'Art](https://kpihx-labs.github.io/presentation/#/STATE_OF_THE_ART.md)
-- [🕒 Évolution](https://kpihx-labs.github.io/presentation/#/EVOLUTION.md)
-- [🚀 Live Tutorials](https://kpihx-labs.github.io/presentation/#/tutos_live/README.md)
-- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
-- [🤖 Agent Mandate](https://kpihx-labs.github.io/presentation/#/AGENT.md)

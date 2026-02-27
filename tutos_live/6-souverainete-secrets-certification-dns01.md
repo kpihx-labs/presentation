@@ -99,12 +99,4 @@ En mode production, Let's Encrypt est très strict. **Utilisez toujours le mode 
 
 **Verdict :** Ouvrez l'application Bitwarden sur votre iPhone, tapez `https://vault.kpihx-labs.com`. Si vous vous connectez sans erreur SSL, vous avez atteint le sommet de l'auto-hébergement sécurisé. 🛡️✨
 
----
-## 🗺️ Navigation
-- [🏠 Accueil](https://kpihx-labs.github.io/presentation/#/README.md)
-- [🔭 Vision](https://kpihx-labs.github.io/presentation/#/VISION.md)
-- [🏗️ État de l'Art](https://kpihx-labs.github.io/presentation/#/STATE_OF_THE_ART.md)
-- [🕒 Évolution](https://kpihx-labs.github.io/presentation/#/EVOLUTION.md)
-- [🚀 Live Tutorials](https://kpihx-labs.github.io/presentation/#/tutos_live/README.md)
-- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
-- [🤖 Agent Mandate](https://kpihx-labs.github.io/presentation/#/AGENT.md)
+

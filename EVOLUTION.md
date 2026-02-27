@@ -43,12 +43,4 @@
 - Hack de l'auth 802.1X via `wpa_supplicant` et OpenSSL `SECLEVEL=0`. (Voir [Tuto 1](https://kpihx-labs.github.io/presentation/#/tutos_live/1-deploiement-proxmox-8021x.md))
 - Première sécurisation SSH (Port 2222, clés uniquement). (Voir [Sécurité 3 : Le Bouclier d'Inactivité (Auto-Logout & SSH Timeout)](https://kpihx-labs.github.io/presentation/#/tutos_live/security/3-bouclier-inactivite-ssh.md))
 
----
-## 🗺️ Navigation
-- [🏠 Accueil](https://kpihx-labs.github.io/presentation/#/README.md)
-- [🔭 Vision](https://kpihx-labs.github.io/presentation/#/VISION.md)
-- [🏗️ État de l'Art](https://kpihx-labs.github.io/presentation/#/STATE_OF_THE_ART.md)
-- [🕒 Évolution](https://kpihx-labs.github.io/presentation/#/EVOLUTION.md)
-- [🚀 Live Tutorials](https://kpihx-labs.github.io/presentation/#/tutos_live/README.md)
-- [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
-- [🤖 Agent Mandate](https://kpihx-labs.github.io/presentation/#/AGENT.md)
+
