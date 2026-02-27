@@ -97,6 +97,24 @@ En mode production, Let's Encrypt est très strict. **Utilisez toujours le mode 
 
 ---
 
-**Verdict :** Ouvrez l'application Bitwarden sur votre iPhone, tapez `https://vault.kpihx-labs.com`. Si vous vous connectez sans erreur SSL, vous avez atteint le sommet de l'auto-hébergement sécurisé. 🛡️✨
+---
+
+## 🏆 LA MASTERCLASS : GÉNÉRALISATION DU "TRUSTED" (HTTPS PARTOUT)
+
+Suite au succès de Vaultwarden, nous avons réalisé une **Masterclass d'architecture** : au lieu de subir des alertes "Unsecured" sur chaque service local (`.homelab`), nous avons profité du certificat Wildcard pour fournir un **accès souverain certifié** à l'ensemble du Homelab privé.
+
+### 🚀 Services mis à jour en "Double Accès" :
+Pour chaque service, nous avons ajouté un second router Traefik lié au domaine `.kpihx-labs.com` et au résolveur `myresolver`.
+
+1.  **PolyTask Pro (`task.kpihx-labs.com`) :** Gestionnaire de tâches désormais certifié. (Voir [polytask.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/polytask.2.yaml)).
+2.  **Base de Données Adminer (`db.kpihx-labs.com`) :** Interface de gestion SQL sécurisée. (Voir [adminer.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/adminer.2.yaml)).
+3.  **DNS AdGuard (`dns.kpihx-labs.com`) :** L'interface d'administration DNS est enfin passée au vert. (Voir [adguard.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/adguard.2.yaml)).
+
+### 🔍 Cas Particuliers (Pourquoi ne pas tout changer ?)
+*   **Sentinel :** Inutile en privé certifié car il est déjà exposé proprement au public via Cloudflare Tunnel avec OAuth.
+*   **Ollama (imhotep-brain) :** C'est une API sans interface web native ; l'accès direct via IP/VPN est suffisant et plus performant.
+*   **Whoami :** Conservé en mode "test initial" pour valider la plomberie brute du réseau sans surcharge de certificats.
+
+**Conclusion :** Votre infrastructure n'est plus une collection de services isolés, mais un véritable **PaaS Souverain** où la sécurité est transparente et universelle. 🛡️✨⚓
 
 

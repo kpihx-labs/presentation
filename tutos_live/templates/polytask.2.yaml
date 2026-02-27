@@ -1,0 +1,46 @@
+# PolyTask Pro Stack (Version 2 - Dual Access Local/Trusted)
+# File: polytask.2.yaml
+# Description: Advanced task manager with certified SSL and local fallback.
+
+services:
+  polytask:
+    build: .
+    container_name: polytask
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=postgres
+      - TZ=Europe/Paris
+    
+    networks:
+      - proxy
+
+    command: >
+      streamlit run app.py
+      --server.port=8501
+      --server.address=0.0.0.0
+      --server.enableCORS=false
+      --server.enableXsrfProtection=false
+      --server.enableWebsocketCompression=false
+      --browser.gatherUsageStats=false
+    
+    labels:
+      - "traefik.enable=true"
+      
+      # --- Router Local (.homelab) ---
+      - "traefik.http.routers.polytask.rule=Host(`task.homelab`)"
+      - "traefik.http.routers.polytask.entrypoints=websecure"
+      - "traefik.http.routers.polytask.tls=true"
+      - "traefik.http.routers.polytask.middlewares=auth"
+
+      # --- Router Souverain (.kpihx-labs.com) ---
+      - "traefik.http.routers.polytask-trusted.rule=Host(`task.kpihx-labs.com`)"
+      - "traefik.http.routers.polytask-trusted.entrypoints=websecure"
+      - "traefik.http.routers.polytask-trusted.tls=true"
+      - "traefik.http.routers.polytask-trusted.tls.certresolver=myresolver"
+      - "traefik.http.routers.polytask-trusted.middlewares=auth"
+
+networks:
+  proxy:
+    external: true

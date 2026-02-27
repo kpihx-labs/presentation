@@ -1,7 +1,9 @@
 # 🕒 Évolution : Chronologie de l'Ingénierie
 
 ## [Février 2026] : L'Ère de l'Auto-Validation et de l'Expérience Web
-- **Certification DNS-01 & "Stealth Trusted" :** Succès du challenge DNS-01 via l'API Cloudflare. Obtention d'un certificat Wildcard officiel pour `*.kpihx-labs.com` sans exposition publique. (Voir [Tuto 6](https://kpihx-labs.github.io/presentation/#/tutos_live/6-souverainete-secrets-certification-dns01.md)).
+- **Masterclass HTTPS Souverain :** Généralisation du certificat Wildcard Let's Encrypt sur l'ensemble des services privés (`dns`, `task`, `db`). (Voir la Masterclass dans le [Tuto 6](https://kpihx-labs.github.io/presentation/#/tutos_live/6-souverainete-secrets-certification-dns01.md)).
+- **Immutabilité des Templates (V2) :** Création et déploiement des templates **V2** ([traefik.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/traefik.2.yaml), [vaultwarden.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/vaultwarden.2.yaml), [polytask.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/polytask.2.yaml), [adguard.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/adguard.2.yaml)).
+- **Certification DNS-01 & "Stealth Trusted" :** Succès du challenge DNS-01 via l'API Cloudflare. Obtention d'un certificat Wildcard officiel pour `*.kpihx-labs.com` sans exposition publique. 
 - **Coffre-fort Souverain :** Déploiement de **Vaultwarden** avec SSL reconnu par les applications mobiles Bitwarden.
 - **Pivot Architectural (Réseau) :** Post-mortem sur le conflit DNS circulaire causé par la conteneurisation de Tailscale. Transition vers le **Subnet Routing** exclusif sur l'hôte PVE pour une robustesse absolue. (Voir le Post-Mortem dans le [Tuto 4](https://kpihx-labs.github.io/presentation/#/tutos_live/4-reseau-overlay-tailscale.md)).
 - **Standardisation du Versioning :** Adoption de la règle d'immutabilité des templates (`xxxx.yaml` ➔ `xxxx.2.yaml`) pour préserver l'historique narratif.

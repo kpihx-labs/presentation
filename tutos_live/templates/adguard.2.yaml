@@ -1,0 +1,52 @@
+# AdGuard Home DNS Resolver (Version 2 - Dual Access Local/Trusted)
+# File: adguard.2.yaml
+# Description: Local DNS server with trusted SSL administration interface.
+
+services:
+  adguard:
+    image: adguard/adguardhome:latest
+    container_name: adguard
+    restart: unless-stopped
+    
+    # --- RÉSEAU ---
+    networks:
+      - proxy
+    
+    # --- PORTS ---
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+
+    environment:
+      - http_proxy=http://129.104.201.11:8080
+      - https_proxy=http://129.104.201.11:8080
+      - no_proxy=localhost,127.0.0.1,10.10.10.0/24
+    
+    # --- PERSISTANCE ---
+    volumes:
+      - ./work:/opt/adguardhome/work
+      - ./conf:/opt/adguardhome/conf
+    
+    # --- INTÉGRATION TRAEFIK (ACCÈS ADMIN) ---
+    labels:
+      - "traefik.enable=true"
+      
+      # 1. Router Local (.homelab) - Inchangé
+      - "traefik.http.routers.adguard.rule=Host(`dns.homelab`)"
+      - "traefik.http.routers.adguard.entrypoints=websecure"
+      - "traefik.http.routers.adguard.tls=true"
+      - "traefik.http.routers.adguard.middlewares=auth"
+      
+      # 2. Router Souverain (.kpihx-labs.com) - AJOUT CERTIFIÉ
+      - "traefik.http.routers.adguard-trusted.rule=Host(`dns.kpihx-labs.com`)"
+      - "traefik.http.routers.adguard-trusted.entrypoints=websecure"
+      - "traefik.http.routers.adguard-trusted.tls=true"
+      - "traefik.http.routers.adguard-trusted.tls.certresolver=myresolver"
+      - "traefik.http.routers.adguard-trusted.middlewares=auth"
+      
+      # 3. CIBLAGE DU SERVICE
+      - "traefik.http.services.adguard.loadbalancer.server.port=3000"
+
+networks:
+  proxy:
+    external: true

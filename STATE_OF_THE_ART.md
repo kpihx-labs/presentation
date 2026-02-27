@@ -70,16 +70,16 @@ La véritable élégance de l'infrastructure réside dans une **abstraction tota
 
 **Le Mécanisme du Split DNS (Version Subnet Routing) :**
 - **Tailscale (VPN Mesh) :** Installé directement sur l'hôte PVE agissant comme **Subnet Router**. Dans la console Tailscale, un **Split DNS** est configuré pour rediriger le domaine `kpihx-labs.com` vers notre DNS interne (`10.10.10.10`).
-- **AdGuard Home (L'Annuaire Local) :** Pour les requêtes `.kpihx-labs.com` qui reviennent au serveur, c'est le conteneur AdGuard qui prend le relais. Il gère également l'**Upstream DNS** pointant vers les DNS de l'école.
+- **AdGuard Home (L'Annuaire Local) :** Pour les requêtes `.kpihx-labs.com` qui reviennent au serveur, c'est le conteneur AdGuard qui prend le relais. (Voir [adguard.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/adguard.2.yaml)).
 - **L'Avantage Ultime :** Le serveur est accessible via un FQDN public (`vault.kpihx-labs.com`) qui résout sur une IP privée locale grâce au tunnel DNS souverain.
 
 ## 🔐 Certification "Stealth Trusted" (DNS-01 Challenge)
 C'est le sommet de la sécurité du lab. Pour obtenir des certificats SSL officiels sans exposer les services sur internet, nous utilisons le **DNS-01 Challenge**. (Voir [Tuto 6 : Souveraineté des Secrets et Certification DNS-01 (Vaultwarden)](https://kpihx-labs.github.io/presentation/#/tutos_live/6-souverainete-secrets-certification-dns01.md))
 
 **Le Flux de Certification :**
-1.  **Traefik** communique avec l'**API Cloudflare** pour prouver la propriété du domaine via un record TXT temporaire.
+1.  **Traefik** communique avec l'**API Cloudflare** pour prouver la propriété du domaine via un record TXT temporaire. (Voir [traefik.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/traefik.2.yaml)).
 2.  **Let's Encrypt** délivre un certificat Wildcard officiel (`*.kpihx-labs.com`).
-3.  **Résultat :** Les services comme **Vaultwarden** bénéficient d'un cadenas vert reconnu par les applications mobiles (Bitwarden), tout en restant **100% invisibles** du web public.
+3.  **Résultat :** Les services comme **Vaultwarden** ou **PolyTask** bénéficient d'un cadenas vert reconnu par les applications mobiles, tout en restant **100% invisibles** du web public. (Voir [vaultwarden.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/vaultwarden.2.yaml) et [polytask.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/polytask.2.yaml)).
 
 ## ☁️ Exposition publique : Cloudflare Tunnel et Kpihx-labs.com
 Pour exposer certains services au public, Tailscale Funnel a d'abord été envisagé, mais jugé trop lourd (un port par service, modifs du docker-compose, URLs non intuitives). (Voir [Tuto 5 : Exposition Publique et Zero Trust (Cloudflare)](https://kpihx-labs.github.io/presentation/#/tutos_live/5-exposition-publique-cloudflare.md))
