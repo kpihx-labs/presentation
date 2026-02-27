@@ -21,7 +21,12 @@ Chaque fichier dans `tutos_live/` doit respecter ce format unifié :
 3.  **100% Exhaustivité :** On doit pouvoir réinitialiser tout le lab à partir de zéro sans connaissance préalable. Aucune étape n'est "trop évidente".
 4.  **Hacks Documentés :** Les solutions "sales" mais vitales (ex: SECLEVEL=0) doivent être mises en avant car elles sont la clé de la réussite. Documentez-les avec leur "Pourquoi".
 5.  **Débogage Intégré :** Chaque tuto doit inclure une section "Cas de débogage" pour anticiper les erreurs classiques.
-6.  **Liens vers Templates :** Les fichiers de configuration volumineux ou scripts doivent être externalisés dans `templates/` et simplement référencés dans le fichier MD.
+6.  **Versioning des Templates (Processus Historique) :** Pour garantir la cohérence narrative, lorsqu'une architecture évolue de façon majeure, **l'ancien template ne doit pas être écrasé**. 
+    - La **Version 1** garde le nom standard : `xxxx.yaml`.
+    - La **Version 2** prend le nom : `xxxx.2.yaml`.
+    - La **Version 3** prend le nom : `xxxx.3.yaml`, et ainsi de suite.
+    - Le tutoriel doit pointer vers la version exacte correspondant à l'étape narrative décrite pour rester fidèle au process historique de construction.
+7.  **Liens vers Templates :** Les fichiers de configuration volumineux ou scripts doivent être externalisés dans `templates/` et simplement référencés dans le fichier MD.
 
 ## ⚙️ Règles de Mise à Jour (CRITIQUE)
 - **Lecture Systématique :** Toujours lire ce `AGENT.md` avant toute action dans `presentation/`.

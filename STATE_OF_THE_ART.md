@@ -68,15 +68,18 @@ Avant même de s'attaquer à Tailscale ou Cloudflare, il fallait industrialiser 
 ## 🌐 L'Abstraction DNS et le Réseau Overlay (Tailscale + AdGuard)
 La véritable élégance de l'infrastructure réside dans une **abstraction totale du réseau**. (Voir [Tuto 4 : Réseau Overlay et DNS Privé (Tailscale & AdGuard)](https://kpihx-labs.github.io/presentation/#/tutos_live/4-reseau-overlay-tailscale.md))
 
-**Preuve de l'Abstraction (Vérifiée sur Docker-Host) :**
-Dans le conteneur `docker-host`, le fichier `/etc/resolv.conf` ne connaît pas l'X. Il pointe uniquement vers :
-`nameserver 100.100.100.100` (MagicDNS de Tailscale).
+**Le Mécanisme du Split DNS (Version Subnet Routing) :**
+- **Tailscale (VPN Mesh) :** Installé directement sur l'hôte PVE agissant comme **Subnet Router**. Dans la console Tailscale, un **Split DNS** est configuré pour rediriger le domaine `kpihx-labs.com` vers notre DNS interne (`10.10.10.10`).
+- **AdGuard Home (L'Annuaire Local) :** Pour les requêtes `.kpihx-labs.com` qui reviennent au serveur, c'est le conteneur AdGuard qui prend le relais. Il gère également l'**Upstream DNS** pointant vers les DNS de l'école.
+- **L'Avantage Ultime :** Le serveur est accessible via un FQDN public (`vault.kpihx-labs.com`) qui résout sur une IP privée locale grâce au tunnel DNS souverain.
 
-**Le Mécanisme du Split DNS :**
-- **Tailscale (VPN Mesh) :** Installé dans le `docker-host` (Conteneur ID 100), en mode Bridge sur le réseau `proxy`. Il agit comme un routeur. Dans Tailscale, un **Split DNS** est configuré : il attrape toutes les requêtes finissant par `.homelab` et les renvoie vers notre serveur interne. Pour toutes les autres requêtes (un namespace global), il les renvoie vers les DNS de l'X (`129.104.30.41`).
-- **AdGuard Home (L'Annuaire Local) :** Pour les requêtes `.homelab` qui reviennent au serveur, c'est le conteneur AdGuard qui prend le relais. Il gère également l'**Upstream DNS** pointant vers les DNS de l'école.
-- **L'Avantage Ultime :** Si le serveur déménage sur une box internet standard, la seule chose à ajuster sera l'IP des serveurs DNS dans le namespace Tailscale. Le conteneur Docker restera sur son MagicDNS `100.100.100.100` sans jamais savoir que son environnement physique a changé.
-- **Routage :** Tailscale redirige les ports 80 et 443 directement vers Traefik. Accéder aux services internes est devenu trivial : `sentinel.homelab`, `traefik.homelab`… sans port, depuis n’importe quel réseau.
+## 🔐 Certification "Stealth Trusted" (DNS-01 Challenge)
+C'est le sommet de la sécurité du lab. Pour obtenir des certificats SSL officiels sans exposer les services sur internet, nous utilisons le **DNS-01 Challenge**. (Voir [Tuto 6 : Souveraineté des Secrets et Certification DNS-01 (Vaultwarden)](https://kpihx-labs.github.io/presentation/#/tutos_live/6-souverainete-secrets-certification-dns01.md))
+
+**Le Flux de Certification :**
+1.  **Traefik** communique avec l'**API Cloudflare** pour prouver la propriété du domaine via un record TXT temporaire.
+2.  **Let's Encrypt** délivre un certificat Wildcard officiel (`*.kpihx-labs.com`).
+3.  **Résultat :** Les services comme **Vaultwarden** bénéficient d'un cadenas vert reconnu par les applications mobiles (Bitwarden), tout en restant **100% invisibles** du web public.
 
 ## ☁️ Exposition publique : Cloudflare Tunnel et Kpihx-labs.com
 Pour exposer certains services au public, Tailscale Funnel a d'abord été envisagé, mais jugé trop lourd (un port par service, modifs du docker-compose, URLs non intuitives). (Voir [Tuto 5 : Exposition Publique et Zero Trust (Cloudflare)](https://kpihx-labs.github.io/presentation/#/tutos_live/5-exposition-publique-cloudflare.md))

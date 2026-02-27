@@ -1,8 +1,10 @@
 # 🕒 Évolution : Chronologie de l'Ingénierie
 
 ## [Février 2026] : L'Ère de l'Auto-Validation et de l'Expérience Web
+- **Certification DNS-01 & "Stealth Trusted" :** Succès du challenge DNS-01 via l'API Cloudflare. Obtention d'un certificat Wildcard officiel pour `*.kpihx-labs.com` sans exposition publique. (Voir [Tuto 6](https://kpihx-labs.github.io/presentation/#/tutos_live/6-souverainete-secrets-certification-dns01.md)).
+- **Coffre-fort Souverain :** Déploiement de **Vaultwarden** avec SSL reconnu par les applications mobiles Bitwarden.
 - **Pivot Architectural (Réseau) :** Post-mortem sur le conflit DNS circulaire causé par la conteneurisation de Tailscale. Transition vers le **Subnet Routing** exclusif sur l'hôte PVE pour une robustesse absolue. (Voir le Post-Mortem dans le [Tuto 4](https://kpihx-labs.github.io/presentation/#/tutos_live/4-reseau-overlay-tailscale.md)).
-- **Unification de la Navigation :** Transition critique vers des **URLs web absolues** sur l'ensemble du dépôt. Résolution définitive des erreurs 404.
+- **Standardisation du Versioning :** Adoption de la règle d'immutabilité des templates (`xxxx.yaml` ➔ `xxxx.2.yaml`) pour préserver l'historique narratif.
 - **Usine de Validation :** Mise en place de scripts de tests full-verbose ([check_links.sh](https://github.com/kpihx-labs/presentation/blob/main/scripts/check_links.sh), [check_templates.sh](https://github.com/kpihx-labs/presentation/blob/main/scripts/check_templates.sh), [check_tutos.sh](https://github.com/kpihx-labs/presentation/blob/main/scripts/check_tutos.sh)) pour garantir l'intégrité du maillage technique.
 - **Intelligence Documentaire :** Intégration d'un moteur de recherche full-text et d'un thème sombre dynamique.
 - **Consolidation du Mandat Agent :** Inscription de la philosophie de reproductibilité par scripts et de proactivité dans [AGENT.md](https://kpihx-labs.github.io/presentation/#/AGENT.md).

@@ -1,0 +1,103 @@
+# Traefik Edge Router Stack (Version 2 - Production with DNS-01 Challenge)
+# File: traefik.2.yaml
+# Description: Global entry point with Production Let's Encrypt (Cloudflare DNS-01) and Wildcard support.
+
+services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy
+    ports:
+      - "80:80" # standard web port
+      - "443:443" # for HTTPS
+      - "8080:8080" # traefik dashbord
+
+      # Ports Funnel (un par service public) 
+      # - "8085:8085" # Funnel KpihX-Labs
+      # - "8086:8086" # Funnel Whoami
+      # - "8087:8087" # Funnel Sentinel 
+    environment: 
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN} 
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro # to allow it to see others containers
+      # Volume persistant pour acme.json 
+      - ./letsencrypt:/letsencrypt
+    command:
+      - "--log.level=DEBUG" # <--- AJOUT CRITIQUE POUR LE DÉBOGAGE
+      # On interdit l'accès au dashbord par http
+      - "--api.insecure=false" 
+      - "--api.dashboard=true"
+      
+      - "--providers.docker=true" # traefik listen to docker
+      - "--providers.docker.exposedbydefault=false" # we don't expose all by default
+      
+      - "--entrypoints.web.address=:80" # HTTP entry point
+      - "--entrypoints.websecure.address=:443" # HTTPS entry point
+      # traefik by default will generate itself its its certificate
+      
+      # redirection HTTP -> HTTPS 
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+
+      # --- Entrypoints Funnel (un par service public) --- 
+      # - "--entrypoints.funnel-kpihx.address=:8085" 
+      # - "--entrypoints.funnel-whoami.address=:8086" 
+      # - "--entrypoints.funnel-sentinel.address=:8087"
+
+      # --- DNS Challenge Configuration --- (Pour utiliser cloudflare pour la certification)
+      # POURQUOI : On définit ici LE résolveur global 'myresolver'
+      - "--certificatesresolvers.myresolver.acme.dnschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.myresolver.acme.email=kpihx.labs@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      
+      # Utiliser le serveur de staging pour les tests pour éviter d'être banni 
+      # - "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+
+      # Pour forcer traefik à checker l'enregistrement fourni par cloudflare en passant par notre dns interne
+      - "--certificatesresolvers.myresolver.acme.dnschallenge.resolvers=10.10.10.10:53,1.1.1.1:53,8.8.8.8:53"
+      # Pour interdire a Traefik de faire ses propres requetes dns
+      - "--certificatesresolvers.myresolver.acme.dnschallenge.disablepropagationcheck=true"
+      # Pour attendre en cas de lenteur de resolution dns
+      - "--certificatesresolvers.myresolver.acme.dnschallenge.delaybeforecheck=60"
+      
+    labels:
+      # autoriser Traefik à se voir lui-même (car exposedbydefault=false)
+      - "traefik.enable=true"
+      # middleware "auth" creation"
+      - "traefik.http.middlewares.auth.basicauth.users=ivann:$$apr1$$/VofQEY5$$Dkubwg4X1xVLKFINO3r.S1"
+
+      # dashboard local
+      - "traefik.http.routers.api-local.rule=Host(`traefik.homelab`)"
+      - "traefik.http.routers.api-local.service=api@internal"
+      - "traefik.http.routers.api-local.entrypoints=websecure" # On précise l'entrée HTTPS
+      - "traefik.http.routers.api-local.tls=true" 
+      - "traefik.http.routers.api-local.middlewares=auth"
+
+      # dashboard trusted
+      - "traefik.http.routers.api.rule=Host(`traefik.kpihx-labs.com`)"
+      - "traefik.http.routers.api.service=api@internal"
+      - "traefik.http.routers.api.entrypoints=websecure" # On précise l'entrée HTTPS
+      - "traefik.http.routers.api.tls=true" 
+      - "traefik.http.routers.api.tls.certresolver=myresolver" # pour la certification
+      - "traefik.http.routers.api.middlewares=auth"
+      
+
+      # ---CONFIGURATION WILDCARD CENTRALE (*.kpihx-labs.com) ---
+      # POURQUOI : On demande à Traefik de générer UN SEUL certificat pour tout le domaine.
+      # Ce certificat sera réutilisable par n'importe quel conteneur (Vault, Sentinel...).
+      - "traefik.http.routers.wildcard-certs.rule=Host(`kpihx-labs.com`)"
+      - "traefik.http.routers.wildcard-certs.entrypoints=websecure"
+      - "traefik.http.routers.wildcard-certs.tls=true"
+      - "traefik.http.routers.wildcard-certs.tls.certresolver=myresolver"
+      - "traefik.http.routers.wildcard-certs.tls.domains[0].main=kpihx-labs.com"
+      - "traefik.http.routers.wildcard-certs.tls.domains[0].sans=*.kpihx-labs.com"
+  
+networks:
+    proxy:
+      external: true

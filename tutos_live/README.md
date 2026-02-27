@@ -8,6 +8,7 @@ This directory contains the step-by-step implementation guides for KpihX Labs. T
 - [3. Industrialisation, Sécurité et DevOps](https://kpihx-labs.github.io/presentation/#/tutos_live/3-industrialisation-devops.md)
 - [4. Réseau Overlay et DNS Privé (Tailscale & AdGuard)](https://kpihx-labs.github.io/presentation/#/tutos_live/4-reseau-overlay-tailscale.md)
 - [5. Exposition Publique et Zero Trust (Cloudflare)](https://kpihx-labs.github.io/presentation/#/tutos_live/5-exposition-publique-cloudflare.md)
+- [6. Souveraineté des Secrets et Certification DNS-01 (Vaultwarden)](https://kpihx-labs.github.io/presentation/#/tutos_live/6-souverainete-secrets-certification-dns01.md)
 
 ### 🛡️ Security Fortress
 - [1. Stratégie de Sauvegarde et Maintenance (3-2-1)](https://kpihx-labs.github.io/presentation/#/tutos_live/security/1-sauvegarde-maintenance-321.md)
