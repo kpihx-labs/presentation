@@ -10,6 +10,10 @@ This directory contains the step-by-step implementation guides for KpihX Labs. T
 - [5. Exposition Publique et Zero Trust (Cloudflare)](https://kpihx-labs.github.io/presentation/#/tutos_live/5-exposition-publique-cloudflare.md)
 - [6. Souveraineté des Secrets et Certification DNS-01 (Vaultwarden)](https://kpihx-labs.github.io/presentation/#/tutos_live/6-souverainete-secrets-certification-dns01.md)
 
+### 🤖 n8n
+- [Index n8n](https://kpihx-labs.github.io/presentation/#/tutos_live/n8n/README.md)
+- [1. Déploiement du Cerveau n8n Privé sur le Homelab](https://kpihx-labs.github.io/presentation/#/tutos_live/n8n/1-deploiement-n8n-prive.md)
+
 ### 🛡️ Security Fortress
 - [1. Stratégie de Sauvegarde et Maintenance (3-2-1)](https://kpihx-labs.github.io/presentation/#/tutos_live/security/1-sauvegarde-maintenance-321.md)
 - [2. Mises à jour Automatiques avec Watchtower](https://kpihx-labs.github.io/presentation/#/tutos_live/security/2-automatisation-watchtower.md)

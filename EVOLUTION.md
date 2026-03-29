@@ -1,5 +1,9 @@
 # 🕒 Évolution : Chronologie de l'Ingénierie
 
+## [Mars 2026] : La Colonne Vertébrale n8n du Personal OS
+- **Déploiement de `n8n` en Cerveau Privé :** Mise en ligne de `n8n` avec un double accès privé (`n8n.kpihx-labs.com` en principal, `n8n.homelab` en fallback) et réutilisation du PostgreSQL existant via une base dédiée.
+- **Évolution de la Procédure Cloudflare :** La documentation a été mise à jour pour refléter la nouvelle UI **Published application routes** à la place de l'ancien wording **Public Hostname**.
+
 ## [Février 2026] : L'Ère de l'Auto-Validation et de l'Expérience Web
 - **Masterclass HTTPS Souverain :** Généralisation du certificat Wildcard Let's Encrypt sur l'ensemble des services privés (`dns`, `task`, `db`). (Voir la Masterclass dans le [Tuto 6](https://kpihx-labs.github.io/presentation/#/tutos_live/6-souverainete-secrets-certification-dns01.md)).
 - **Immutabilité des Templates (V2) :** Création et déploiement des templates **V2** ([traefik.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/traefik.2.yaml), [vaultwarden.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/vaultwarden.2.yaml), [polytask.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/polytask.2.yaml), [adguard.2.yaml](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/adguard.2.yaml)).
@@ -44,5 +48,4 @@
 - Installation de **Proxmox VE 8**. (Voir [Tuto 1 : Déploiement Proxmox sur Réseau Sécurisé (802.1X Filaire)](https://kpihx-labs.github.io/presentation/#/tutos_live/1-deploiement-proxmox-8021x.md))
 - Hack de l'auth 802.1X via `wpa_supplicant` et OpenSSL `SECLEVEL=0`. (Voir [Tuto 1](https://kpihx-labs.github.io/presentation/#/tutos_live/1-deploiement-proxmox-8021x.md))
 - Première sécurisation SSH (Port 2222, clés uniquement). (Voir [Sécurité 3 : Le Bouclier d'Inactivité (Auto-Logout & SSH Timeout)](https://kpihx-labs.github.io/presentation/#/tutos_live/security/3-bouclier-inactivite-ssh.md))
-
 

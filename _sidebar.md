@@ -16,6 +16,10 @@
   - [5. Exposition Cloudflare Zero Trust](/tutos_live/5-exposition-publique-cloudflare.md)
   - [6. Certification SSL DNS-01](/tutos_live/6-souverainete-secrets-certification-dns01.md)
 
+- **n8n**
+  - [🤖 Index n8n](/tutos_live/n8n/README.md)
+  - [1. Déploiement n8n Privé](/tutos_live/n8n/1-deploiement-n8n-prive.md)
+
 - **Sécurité**
   - [1. Stratégie Sauvegarde 3-2-1](/tutos_live/security/1-sauvegarde-maintenance-321.md)
   - [2. Auto-Update Watchtower](/tutos_live/security/2-automatisation-watchtower.md)

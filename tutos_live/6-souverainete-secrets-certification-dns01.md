@@ -99,6 +99,22 @@ En mode production, Let's Encrypt est très strict. **Utilisez toujours le mode 
 
 ---
 
+## 💡 RETOUR D'EXPÉRIENCE (REX) : LE COMBAT DU CADENAS VERT
+
+Même avec un certificat valide, le passage au "Vert" peut être capricieux à cause des navigateurs. Voici les leçons apprises :
+
+### 1. Le Piège du Cache Navigateur (Edge/Chrome)
+Si votre cadenas reste barré avec le message *"Some parts of this site are not secure"*, ce n'est pas le serveur, c'est votre navigateur qui est "têtu".
+*   **Action 1 (Nettoyage HSTS) :** Allez sur `edge://net-internals/#hsts` (ou `chrome://net-internals/#hsts`). Tout en bas, dans **"Delete domain security policies"**, entrez `vault.kpihx-labs.com` et cliquez sur **Delete**.
+*   **Action 2 (Cache Image) :** Videz le cache des images et fichiers (Ctrl+Shift+Suppr).
+*   **Action 3 (Redémarrage) :** Fermez et relancez complètement le navigateur.
+
+### 2. L'Erreur de l'Extension Bitwarden
+Si l'extension refuse de se connecter en disant que l'URL n'est pas sécurisée :
+*   **Vérifiez le préfixe :** Dans les paramètres du serveur, assurez-vous d'avoir écrit `https://vault.kpihx-labs.com`. L'oubli du **`https://`** est fatal.
+
+---
+
 ## 🏆 LA MASTERCLASS : GÉNÉRALISATION DU "TRUSTED" (HTTPS PARTOUT)
 
 Suite au succès de Vaultwarden, nous avons réalisé une **Masterclass d'architecture** : au lieu de subir des alertes "Unsecured" sur chaque service local (`.homelab`), nous avons profité du certificat Wildcard pour fournir un **accès souverain certifié** à l'ensemble du Homelab privé.

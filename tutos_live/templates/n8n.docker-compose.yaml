@@ -1,0 +1,28 @@
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - n8n_data:/home/node/.n8n
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.n8n-private.rule=Host(`n8n.kpihx-labs.com`)"
+      - "traefik.http.routers.n8n-private.entrypoints=websecure"
+      - "traefik.http.routers.n8n-private.tls=true"
+      - "traefik.http.routers.n8n-private.tls.certresolver=myresolver"
+      - "traefik.http.routers.n8n-fallback.rule=Host(`n8n.homelab`)"
+      - "traefik.http.routers.n8n-fallback.entrypoints=websecure"
+      - "traefik.http.routers.n8n-fallback.tls=true"
+      - "traefik.http.services.n8n.loadbalancer.server.port=5678"
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  n8n_data:

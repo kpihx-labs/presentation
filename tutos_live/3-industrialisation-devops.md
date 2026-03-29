@@ -92,7 +92,7 @@ ssh-add ~/.ssh/id_ed25519_gitlab
 **Sur GitLab.com :**
 1.  Créez le groupe **"KpihX Labs"** (`kpihx-labs`).
 2.  Définissez les variables CI/CD globales (*Settings > CI/CD > Variables*) :
-    *   `DB_PASS`, `CHAT_ID`, `TELEGRAM_TOKEN`, `GITHUB_TOKEN`.
+    *   `DB_PASS`, `CHAT_ID`, `TELEGRAM_HOMELAB_TOKEN`, `GITHUB_TOKEN`.
 `GITHUB_TOKEN` est un token (classic) à créer sur github avec les droits:
 * repo
 * admin:org

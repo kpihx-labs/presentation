@@ -97,6 +97,19 @@ Pour exposer certains services au public, Tailscale Funnel a d'abord été envis
 - Le même service existe en local (`whoami.homelab`) pour tester la cohérence interne/externe.
 - Ce test a validé toute la chaîne : local, proxy de l'X, DNS interne, DNS public, tunnel, certificats, authentification.
 
+## 🤖 n8n : Le Cerveau d'Orchestration Privé
+Le lab possède désormais une instance **`n8n` de production** qui sert de colonne vertébrale à un futur Personal OS. La philosophie retenue est volontairement dissociée :
+
+```text
+n8n.kpihx-labs.com
+-> cockpit privé principal
+
+n8n.homelab
+-> fallback privé
+```
+
+(Voir [Tuto n8n 1 : Déploiement du Cerveau n8n Privé sur le Homelab](https://kpihx-labs.github.io/presentation/#/tutos_live/n8n/1-deploiement-n8n-prive.md)).
+
 ## 🎯 Inventaire des Services (Février 2026)
 L'infrastructure héberge actuellement **14 services actifs**, répartis en deux piliers d'exposition :
 

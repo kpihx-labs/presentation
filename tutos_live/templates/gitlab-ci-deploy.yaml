@@ -16,7 +16,7 @@ deploy_homelab:
     
     # 1. Dynamically recreate the .env file from GitLab CI/CD Secrets
     # Note: Double the '>>' to append or use '>' to overwrite.
-    - echo "TELEGRAM_TOKEN=$TELEGRAM_TOKEN" >> .env
+    - echo "TELEGRAM_HOMELAB_TOKEN=$TELEGRAM_HOMELAB_TOKEN" >> .env
     - echo "CHAT_ID=$CHAT_ID" >> .env
     
     # 2. Deploy the stack

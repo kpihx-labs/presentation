@@ -32,7 +32,7 @@ The documentation is dynamically served via **Docsify** at:
 
 ## 🔐 CI/CD Secret Variables
 To function, the GitLab pipelines require the following variables defined in the Group/Project settings:
-- `TELEGRAM_TOKEN`: Bot token for status notifications.
+- `TELEGRAM_HOMELAB_TOKEN`: Bot token for status notifications.
 - `CHAT_ID`: Telegram chat ID for alerts.
 - `DB_PASS`: Master password for the PostgreSQL stack.
 - `GITHUB_TOKEN`: Classic token with `repo` and `admin:org` scopes for mirroring.

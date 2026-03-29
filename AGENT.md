@@ -46,9 +46,47 @@ Chaque fichier dans `tutos_live/` doit respecter ce format unifié :
     3. **Full Verbose :** Tous les scripts créés doivent être **full verbose** par défaut. Ils doivent imprimer chaque étape franchie, les fichiers scannés, et le détail des succès/échecs pour une transparence totale.
     4. Exécuter ce script.
     5. Ces scripts font office de tests. **Avant chaque commit majeur, il faut impérativement relancer ces scripts de validation** pour s'assurer que l'intégrité de la documentation n'est pas compromise (liens brisés, templates non référencés, tutos orphelins).
-- **Proactivité & Évolution Stratégique :** L'agent n'est pas un simple exécutant. Après avoir terminé une tâche technique, l'agent DOIT analyser l'impact de son travail sur l'ensemble de la documentation. Il DOIT systématiquement proposer :
+- **Proactivité & Enregistrement des Connaissances :** L'agent n'est pas un simple exécutant. Il DOIT, sans demande explicite, enregistrer les informations clés découvertes sur l'architecture (remotes GitLab/GitHub, services, IPs, structure des volumes, clés de configuration). Ces informations doivent être consignées dans la section **🧠 Agent Internal Knowledge Base** en bas de ce fichier. L'agent est libre d'ajuster cette section sans contrainte pour mieux cerner l'évolution du projet. De plus, à la fin de chaque tâche, l'agent DOIT systématiquement proposer :
     *   La mise à jour d'un tutoriel existant (`tutos_live/`) si la méthode a changé.
     *   La création d'un nouveau tutoriel si une nouvelle brique d'infrastructure a été posée.
     *   L'actualisation ou la création d'un template dans `templates/`.
     *   Une suggestion d'amélioration dans `IDEAS.md`.
-    L'agent doit rester proactif pour garantir que la "Boîte Noire" est toujours le reflet exact et vivant de la production.
+
+---
+
+# 🧠 Agent Internal Knowledge Base
+*Cette section est réservée à l'usage autonome de l'IA pour maintenir le contexte architectural du projet. L'agent peut la modifier librement pour enregistrer ses découvertes.*
+
+## 📂 Source Control & Remotes
+- **GitLab Org :** `kpihx-labs` (`git@gitlab.com:kpihx-labs/`)
+- **GitHub Org :** `kpihx-labs` (`https://github.com/kpihx-labs/`)
+- **Repositories Identifiés :**
+    - `presentation` : Vitrine Docsify (celui-ci).
+    - `polytask` : Gestionnaire de tâches (Streamlit/Postgres).
+    - `wa-bot` : WhatsApp Integration Bot.
+    - `sentinel` : Monitoring System.
+    - `imhotep` : IA/RAG Suite.
+
+## 🖥️ Infrastructure (docker-host)
+- **IP Locale :** `10.10.10.10`
+- **Réseau Docker :** `proxy` (externe)
+- **Stacks Portainer (ID identifiés) :**
+    - `1` : Traefik (Edge Router)
+    - `2` : Whoami (Test) / Polytask
+    - `3` : Database (Postgres/Adminer)
+    - `4` : Watchtower (Auto-update)
+    - `6` : Ingress (Cloudflare Tunnel)
+    - `7` : Imhotep-Brain (Ollama)
+    - `8` : Vaultwarden
+
+## 🌐 Network & DNS
+- **Hôte PVE (Proxmox) :** `100.123.81.21` (Tailscale IP).
+- **DNS Interne (AdGuard) :** `10.10.10.10` (Port 53).
+- **DNS Resolvers (Upstream) :** `129.104.30.41`, `129.104.201.51` (L'X).
+- **SSL Strategy :** DNS-01 Challenge via Cloudflare API.
+- **Wildcard :** `*.kpihx-labs.com` ➔ Résolveur `myresolver`.
+
+## 🛠️ Configuration Keys (Environment)
+- `CF_DNS_API_TOKEN` : Token Cloudflare pour DNS-01.
+- `SECLEVEL=0` : Requis pour authentification Radius de l'X sur Proxmox.
+- `delaybeforecheck=60` : Requis pour laisser le temps au DNS de se propager à travers le firewall de l'X.

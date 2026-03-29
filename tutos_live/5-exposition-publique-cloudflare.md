@@ -68,17 +68,31 @@ On définit qui a le droit d'entrer.
 
 ---
 
-## 🚦 PHASE 4 : LE ROUTEUR PUBLIC (PUBLIC HOSTNAMES)
+## 🚦 PHASE 4 : LE ROUTEUR PUBLIC (PUBLISHED APPLICATION ROUTES)
 
 Maintenant, on dit au Tunnel où envoyer le trafic.
 
+**⚠️ Mise à jour importante de l'interface Cloudflare :**
+L'ancien wording **"Public Hostname"** a été progressivement absorbé dans la nouvelle UI sous le nom :
+
+```text
+Published application routes
+```
+
+L'idée reste la même, mais l'interface pousse désormais un objet un peu plus riche :
+*   hostname,
+*   path optionnel,
+*   type de service,
+*   URL d'origine.
+
 1.  Va dans **Networks** > **Tunnels**.
 2.  Clique sur ton tunnel > **Configure**.
-3.  Onglet **Public Hostname** > **Add a public hostname**.
+3.  Onglet **Published application routes** > **Add a published application route**.
 
 **Configuration :**
 *   **Subdomain :** `sentinel`
 *   **Domain :** `kpihx-labs.com`
+*   **Path :** laisser vide
 *   **Service :**
     *   Type : **`HTTPS`** (Car ton Traefik force le HTTPS en interne).
     *   URL : **`traefik:443`**
@@ -88,7 +102,14 @@ Traefik utilise un certificat "maison" (auto-signé). Cloudflare va le rejeter p
 1.  Clique sur **Additional application settings**.
 2.  Clique sur **TLS**.
 3.  Active **No TLS Verify**.
-4.  Clique sur **Save hostname**.
+4.  Clique sur **Save route** (ou l'équivalent proposé par l'UI du moment).
+
+**💡 Cas machine-only (webhooks) :**
+Pour un service exposant des webhooks à des tiers machines (Telegram, WhatsApp, etc.), la logique est la même mais **sans Cloudflare Access** devant, car ces services ne savent pas passer un écran Google OAuth.
+
+**Capture — nouvelle UI Cloudflare :**
+
+![Cloudflare Published Application Routes](assets/n8n/cloudflare-add-published-route.png)
 
 ---
 
@@ -133,5 +154,3 @@ Il faut dire à Traefik (sur ton serveur) d'accepter ce nouveau nom de domaine p
 6.  **Succès :** Vous voyez votre Dashboard Sentinel.
 
 Tu as maintenant une exposition publique de niveau entreprise, protégée par Google, sans aucun port ouvert chez toi. 🛡️✨⚓
-
-
