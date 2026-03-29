@@ -128,7 +128,7 @@ Pour chaque service, nous avons ajouté un second router Traefik lié au domaine
 
 ### 🔍 Cas Particuliers (Pourquoi ne pas tout changer ?)
 *   **Sentinel :** Inutile en privé certifié car il est déjà exposé proprement au public via Cloudflare Tunnel avec OAuth.
-*   **Ollama (imhotep-brain) :** C'est une API sans interface web native ; l'accès direct via IP/VPN est suffisant et plus performant.
+
 *   **Whoami :** Conservé en mode "test initial" pour valider la plomberie brute du réseau sans surcharge de certificats.
 
 **Conclusion :** Votre infrastructure n'est plus une collection de services isolés, mais un véritable **PaaS Souverain** où la sécurité est transparente et universelle. 🛡️✨⚓

@@ -6,7 +6,7 @@
   - [🚜 Portabilité](/PORTABILITY.md)
   - [🛠️ Templates](https://github.com/kpihx-labs/presentation/tree/main/tutos_live/templates)
   - [💡 Ideas](/IDEAS.md)
-  - [🤖 Agent Mandate](/AGENT.md)
+
 
 - **Tutos Live**
   - [1. Déploiement Proxmox 802.1X](/tutos_live/1-deploiement-proxmox-8021x.md)

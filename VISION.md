@@ -110,7 +110,7 @@ Un assistant qui ne remplace pas l’humain, mais qui augmente l’humain. Un as
 
 Et naturellement, si ce copilot existe pour mon homelab, il doit aussi exister dans la vitrine kpihx‑labs, sous la forme d’un assistant transversal, capable d’aider l’utilisateur à naviguer, comprendre, agir, sans jamais cacher la logique.
 
-C’est dans cette dynamique que la **Vision 3** de kpihx‑labs s’est imposée : un Lab IA, un espace où l’on peut manipuler des modèles, configurer des paramètres, créer des branches de conversation, utiliser une API, expérimenter comme dans Google AI Studio mais en auto‑hébergé, transparent, contrôlé. (Voir [Template Ollama](https://github.com/kpihx-labs/presentation/blob/main/tutos_live/templates/ollama.yaml)).
+C’est dans cette dynamique que la **Vision 3** de kpihx‑labs s’est imposée : un Lab IA, un espace où l’on peut manipuler des modèles, configurer des paramètres, créer des branches de conversation, utiliser une API, expérimenter comme dans Google AI Studio mais en auto‑hébergé, transparent, contrôlé.
 
 ## 🤝 Quand la technique rencontre l’humain : l’idée d’une équipe
 
@@ -154,7 +154,7 @@ Tout cela se fera progressivement, naturellement, sans précipitation, mais avec
 Aujourd’hui, ce qui avait commencé comme un simple besoin de comprendre le réseau est devenu :
 - un laboratoire d’ingénierie,
 - une plateforme en construction,
-- un futur copilot,
+- un futur système agentique, un copilote pour manager l'infrastructure,
 - une vision IA,
 - un projet humain,
 - une aventure collective en devenir.

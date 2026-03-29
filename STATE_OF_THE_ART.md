@@ -126,7 +126,7 @@ Accessibles via `https://service.kpihx-labs.com` (Souverain) ou `.homelab` (Loca
 - **adguard** : Serveur DNS récursif et filtrage (Cœur de l'abstraction).
 - **portainer** : Orchestration et gestion des stacks Docker.
 - **traefik** : Routeur Edge et automate ACME (DNS-01).
-- **imhotep-brain** : Instance **Ollama** locale pour l'IA générative souveraine.
+
 - **wa-bot** : Bot d'intégration WhatsApp pour les notifications système.
 - **postgres** & **adminer** : Base de données relationnelle et interface de gestion.
 - **watchtower** : Automatisation des mises à jour d'images Docker.
