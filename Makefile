@@ -1,7 +1,7 @@
 .PHONY: push
 
-# Pushes the current branch to all configured remotes (github and gitlab)
+# Pushes the current branch and tags to the gitlab remote
 push:
-	@echo "--> Pushing to all remotes (github & gitlab)..."
-	git push github HEAD
-	git push gitlab HEAD
+	@echo "--> Pushing to gitlab..."
+	git push gitlab --all
+	git push gitlab --tags
