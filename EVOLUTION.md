@@ -1,6 +1,9 @@
-# 🕒 Évolution : Chronologie de l'Ingénierie
-
-## [Mars 2026] : La Colonne Vertébrale n8n du Personal OS
+## [Avril 2026] : Stabilisation "Phoenix v3.1"
+- **Modularisation Complète de l'Infrastructure :** Migration vers une architecture en deux nœuds indépendants (`proxmox/` et `docker_host/`). Tous les scripts utilisent désormais des chemins relatifs et `$HOME`.
+- **Dispatcher `hsh` :** Création de l'outil de pilotage centralisé pour les sauvegardes, la maintenance et l'audit de santé global.
+- **Sauvegardes Déterministes (Vault) :** Implémentation de la dérivation de clé GPG à la volée via le Master Password Bitwarden (Zero-Persistence).
+- **Restauration Cloud Opérationnelle :** Mise en service de `restore_docker_host.sh` et `restore_vault.sh` pour une reprise d'activité (PRA) en une commande.
+- **Standard de Documentation Agent :** Adoption du mandat "Dual Link" (Local/GitLab) pour toutes les références de scripts dans les tutoriels.
 - **Déploiement de `n8n` en Cerveau Privé :** Mise en ligne de `n8n` avec un double accès privé (`n8n.kpihx-labs.com` en principal, `n8n.homelab` en fallback) et réutilisation du PostgreSQL existant via une base dédiée.
 - **Évolution de la Procédure Cloudflare :** La documentation a été mise à jour pour refléter la nouvelle UI **Published application routes** à la place de l'ancien wording **Public Hostname**.
 

@@ -12,21 +12,25 @@ Dans un environnement réseau sécurisé (type École Polytechnique) utilisant u
 2.  **Instabilité USB :** Déconnexions intermittentes de l'adaptateur nécessitant une réinitialisation de l'interface.
 3.  **Isolation du Conteneur :** Perte de connectivité du pont NAT (`vmbr1`) empêchant le conteneur Docker d'accéder à Internet, même si l'hôte est en ligne.
 
-**La solution :** Un script "Watchdog" automatisé qui vérifie l'état du réseau toutes les 5 minutes et applique des mesures correctives graduelles.
+**La solution :** Un script "Watchdog" automatisé qui vérifie l'état du réseau toutes les **4 minutes** et applique des mesures correctives graduelles.
+
+> **Architecture Phoenix v3.1 :** Le script est déployé dans `/root/proxmox/network/` — plus de fichiers éparpillés dans `/root/` directement.
 
 ---
 
 ## 2. Implémentation du Script
 
-Le script doit être placé dans le répertoire `/root/` pour garantir les privilèges nécessaires à la manipulation des interfaces réseaux et des conteneurs Proxmox.
-
 ### ✅ La Solution
-1. **Source réelle :** [scripts/network_watchdog.sh](https://github.com/kpihx-labs/scripts/blob/main/network_watchdog.sh)
-2. **Préparation du fichier :**
-   ```bash
-   sudo touch /root/network_watchdog.sh
-   sudo chmod +x /root/network_watchdog.sh
-   ```
+- **Local :** [`sh/proxmox/network/network_watchdog.sh`](https://gitlab.com/kpihx-labs/scripts/-/blob/main/proxmox/network/network_watchdog.sh)
+- **Déployé à :** `/root/proxmox/network/network_watchdog.sh` sur `kpihx-labs`
+- **Log :** `/var/log/network_watchdog.log`
+- **Log cron stderr :** `/var/log/cron_watchdog_debug.log`
+
+**Déploiement :**
+```bash
+rsync -avzL sh/proxmox/ ivann@kpihx-labs:/tmp/proxmox/
+ssh -t kpihx-labs "sudo mv /tmp/proxmox /root/proxmox && sudo chmod +x /root/proxmox/network/*.sh"
+```
 
 ### 🔍 LE PROTOCOLE DE RÉPARATION (LOGIQUE)
 
@@ -42,17 +46,16 @@ Il suit ensuite une escalade de la force :
 
 ## 3. Automatisation avec Cron
 
-Pour que la surveillance soit constante, nous programmons le script pour s'exécuter toutes les 5 minutes.
+Pour que la surveillance soit constante, le script est programmé via cron pour s'exécuter **toutes les 4 minutes**.
 
-1.  Ouvrez le crontab de **root** :
+1.  Ouvrez le crontab de **root** sur `kpihx-labs` :
     ```bash
-    sudo crontab -e
+    ssh -t kpihx-labs "sudo crontab -e"
     ```
-2.  Ajoutez la ligne suivante à la fin du fichier :
-    ```text
-    */5 * * * * /root/network_watchdog.sh >> /var/log/cron_watchdog_debug.log 2>&1
+2.  Ajoutez :
+    ```cron
+    */4 * * * * /root/proxmox/network/network_watchdog.sh >> /var/log/cron_watchdog_debug.log 2>&1
     ```
-    *Note : La redirection vers le fichier `.log` permet de capturer d'éventuelles erreurs de syntaxe.*
 
 ---
 
